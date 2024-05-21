@@ -20,17 +20,17 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col lg:flex-row lg:w-2/3 lg:justify-between mt-[40px] lg:mt-0 lg:gap-10">
-                    <div className="flex justify-between lg:gap-10 gap-0 lg:mb-[40px] mb-0">
+                    <div className="flex flex-col sm:flex-row justify-between lg:gap-10 gap-0 lg:mb-[40px] mb-0">
                         <div>
-                            <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px]">
+                            <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px] text-center sm:text-start">
                                 Links
                             </p>
                             {navigation.map((item, index) => (
                                 <Link
                                     key={item.id}
-                                    className={`block lg:flex font-poppins font-bold text-base mb-[40px] lg:mb-[50px] ${
+                                    className={`block lg:flex font-poppins font-bold text-base mb-[40px] lg:mb-[50px] text-center sm:text-start${
                                         index === navigation.length - 1
-                                            ? 'mb-0'
+                                            ? 'mb-0 sm:text-start'
                                             : ''
                                     }`}
                                     to={item.url}
@@ -40,13 +40,13 @@ const Footer = () => {
                             ))}
                         </div>
                         <div>
-                            <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px]">
+                            <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px] text-center sm:text-start">
                                 Help
                             </p>
                             {help.map((item, index) => (
                                 <Link
                                     key={item.id}
-                                    className={`block lg:flex font-poppins font-bold text-base mb-[40px] lg:mb-[50px] ${
+                                    className={`block lg:flex font-poppins font-bold text-base mb-[40px] lg:mb-[50px] text-center sm:text-start ${
                                         index === help.length - 1 ? 'mb-0' : ''
                                     }`}
                                     to={item.url}
@@ -67,7 +67,7 @@ const Footer = () => {
                                 type="text"
                                 placeholder="Enter Your Email"
                             />
-                            <button className="font-poppins font-semibold text-base border-b-[1px] border-color-7 ">
+                            <button className="font-poppins font-semibold text-base border-b-[1px] border-color-7">
                                 SUBSCRIBE
                             </button>
                         </div>
