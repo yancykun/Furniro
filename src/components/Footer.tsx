@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { help, navigation } from '../constants';
 import Section from './Section';
+import Button from './Button';
 
 const Footer = () => {
     return (
@@ -61,15 +62,13 @@ const Footer = () => {
                         <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px]">
                             Newsletter
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex flex-col items-center sm:flex-row gap-4">
                             <input
-                                className="font-poppins p-2 border-b-[1px] border-color-7"
+                                className="font-poppins p-3 border border-color-4 rounded-sm"
                                 type="text"
-                                placeholder="Enter Your Email"
+                                placeholder="Enter Your Email Address"
                             />
-                            <button className="font-poppins font-semibold text-base border-b-[1px] border-color-7">
-                                SUBSCRIBE
-                            </button>
+                            <Button className="w-[8rem]">SUBSCRIBE</Button>
                         </div>
                     </div>
                 </div>
