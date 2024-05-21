@@ -20,7 +20,7 @@ const Footer = () => {
                 </div>
 
                 <div className="flex flex-col lg:flex-row lg:w-2/3 lg:justify-between mt-[40px] lg:mt-0 lg:gap-10">
-                    <div className="flex justify-between gap-10 lg:mb-[40px] mb-0">
+                    <div className="flex justify-between lg:gap-10 gap-0 lg:mb-[40px] mb-0">
                         <div>
                             <p className="font-poppins text-base text-color-6 mb-[40px] lg:mb-[50px]">
                                 Links
