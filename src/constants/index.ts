@@ -58,31 +58,41 @@ export const navigation = [
     },
 ];
 
-export const category = [
+export const categories = [
     {
         id: '0',
         title: 'Dining room',
         image: dining,
+        category: 'dining',
+        url: '/categories/dining',
     },
     {
         id: '1',
         title: 'Living room',
         image: living,
+        category: 'living',
+        url: '/categories/living',
     },
     {
         id: '2',
         title: 'Bedroom',
         image: bedroom,
+        category: 'bedroom',
+        url: '/categories/bedroom',
     },
     {
         id: '3',
         title: 'Kitchen',
         image: kitchen,
+        category: 'kitchen',
+        url: '/categories/kitchen',
     },
     {
         id: '4',
         title: 'Workplace',
         image: workplace,
+        category: 'workplace',
+        url: '/categories/workplace',
     },
 ];
 
@@ -93,6 +103,8 @@ export const products = [
         name: 'Quaint Oak',
         price: 85.99,
         category: 'dining',
+        rating: 4.5,
+        popularity: 120,
     },
     {
         id: '1',
@@ -100,6 +112,8 @@ export const products = [
         name: 'Modern Wave',
         price: 129.0,
         category: 'dining',
+        rating: 4.0,
+        popularity: 95,
     },
     {
         id: '2',
@@ -107,6 +121,8 @@ export const products = [
         name: 'Curve',
         price: 142.5,
         category: 'dining',
+        rating: 4.7,
+        popularity: 130,
     },
     {
         id: '3',
@@ -114,6 +130,8 @@ export const products = [
         name: 'Rustic',
         price: 112.3,
         category: 'dining',
+        rating: 4.2,
+        popularity: 110,
     },
     {
         id: '4',
@@ -121,6 +139,8 @@ export const products = [
         name: 'Dine',
         price: 93.75,
         category: 'dining',
+        rating: 4.3,
+        popularity: 85,
     },
     {
         id: '5',
@@ -128,6 +148,8 @@ export const products = [
         name: 'Cozy Nest',
         price: 199.99,
         category: 'living',
+        rating: 4.8,
+        popularity: 200,
     },
     {
         id: '6',
@@ -135,6 +157,8 @@ export const products = [
         name: 'Metro',
         price: 210.45,
         category: 'living',
+        rating: 4.1,
+        popularity: 150,
     },
     {
         id: '7',
@@ -142,6 +166,8 @@ export const products = [
         name: 'Haven',
         price: 178.9,
         category: 'living',
+        rating: 4.6,
+        popularity: 175,
     },
     {
         id: '8',
@@ -149,6 +175,8 @@ export const products = [
         name: 'Chic Corner',
         price: 205.0,
         category: 'living',
+        rating: 4.4,
+        popularity: 160,
     },
     {
         id: '9',
@@ -156,6 +184,8 @@ export const products = [
         name: 'Comfort',
         price: 189.99,
         category: 'living',
+        rating: 4.5,
+        popularity: 180,
     },
     {
         id: '10',
@@ -163,6 +193,8 @@ export const products = [
         name: 'Suite',
         price: 250.75,
         category: 'bedroom',
+        rating: 4.7,
+        popularity: 210,
     },
     {
         id: '11',
@@ -170,6 +202,8 @@ export const products = [
         name: 'Sleep',
         price: 245.5,
         category: 'bedroom',
+        rating: 4.5,
+        popularity: 190,
     },
     {
         id: '12',
@@ -177,6 +211,8 @@ export const products = [
         name: 'Nook',
         price: 230.0,
         category: 'bedroom',
+        rating: 4.6,
+        popularity: 175,
     },
     {
         id: '13',
@@ -184,6 +220,8 @@ export const products = [
         name: 'Quiet',
         price: 215.4,
         category: 'bedroom',
+        rating: 4.4,
+        popularity: 160,
     },
     {
         id: '14',
@@ -191,6 +229,8 @@ export const products = [
         name: 'Nest',
         price: 260.2,
         category: 'bedroom',
+        rating: 4.8,
+        popularity: 220,
     },
     {
         id: '15',
@@ -198,6 +238,8 @@ export const products = [
         name: 'Cook Haven',
         price: 175.0,
         category: 'kitchen',
+        rating: 4.3,
+        popularity: 140,
     },
     {
         id: '16',
@@ -205,6 +247,8 @@ export const products = [
         name: 'Gourmet',
         price: 189.99,
         category: 'kitchen',
+        rating: 4.5,
+        popularity: 180,
     },
     {
         id: '17',
@@ -212,6 +256,8 @@ export const products = [
         name: 'Delight',
         price: 199.0,
         category: 'kitchen',
+        rating: 4.7,
+        popularity: 170,
     },
     {
         id: '18',
@@ -219,6 +265,8 @@ export const products = [
         name: 'Culinary',
         price: 185.75,
         category: 'kitchen',
+        rating: 4.4,
+        popularity: 160,
     },
     {
         id: '19',
@@ -226,6 +274,8 @@ export const products = [
         name: 'Chef Oasis',
         price: 210.5,
         category: 'kitchen',
+        rating: 4.6,
+        popularity: 200,
     },
     {
         id: '20',
@@ -233,6 +283,8 @@ export const products = [
         name: 'Gray',
         price: 150.25,
         category: 'workplace',
+        rating: 4.2,
+        popularity: 120,
     },
     {
         id: '21',
@@ -240,6 +292,8 @@ export const products = [
         name: 'Office Hub',
         price: 140.99,
         category: 'workplace',
+        rating: 4.0,
+        popularity: 110,
     },
     {
         id: '22',
@@ -247,6 +301,8 @@ export const products = [
         name: 'Desk Pro',
         price: 135.75,
         category: 'workplace',
+        rating: 4.1,
+        popularity: 100,
     },
     {
         id: '23',
@@ -254,6 +310,8 @@ export const products = [
         name: 'Space Plus',
         price: 122.5,
         category: 'workplace',
+        rating: 4.3,
+        popularity: 130,
     },
     {
         id: '24',
@@ -261,6 +319,8 @@ export const products = [
         name: 'Aero Desk',
         price: 99,
         category: 'workplace',
+        rating: 4.2,
+        popularity: 140,
     },
 ];
 

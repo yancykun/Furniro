@@ -1,6 +1,7 @@
 import { hero } from '../assets';
 import Button from './Button';
 import Section from './Section';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
     return (
@@ -20,9 +21,11 @@ const Hero = () => {
                         Introducing our new collection: Elevate your space with
                         style. Explore now!
                     </p>
-                    <Button className="h-[3.375rem] md:h-[4.375rem] ">
-                        Shop now
-                    </Button>
+                    <Link to="/shop">
+                        <Button className="h-[3.375rem] md:h-[4.375rem] ">
+                            Shop now
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </Section>
