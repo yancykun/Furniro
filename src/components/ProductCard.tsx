@@ -3,13 +3,13 @@ import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'; // Import sta
 import Button from './Button';
 
 type ProductCardProps = {
-    showMore: boolean;
+    showMore?: boolean;
     visibleProducts?: number;
     handleShowMore?: () => void;
 };
 
 const ProductCard = ({
-    showMore,
+    showMore = true,
     visibleProducts = products.length,
     handleShowMore,
 }: ProductCardProps) => {
