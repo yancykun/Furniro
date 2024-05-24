@@ -12,7 +12,6 @@ const Button = ({
     className = '',
     onClick,
     white = false,
-
     border,
 }: ButtonProps) => {
     const classes = `button relative inline-flex items-center justify-center w-[12.5rem] h-[3.125rem] cursor-pointer

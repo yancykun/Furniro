@@ -32,6 +32,7 @@ const Product = () => {
                 Our Products
             </h2>
             <ProductCard
+                products={products}
                 showMore={showMore}
                 visibleProducts={visibleProducts}
                 handleShowMore={handleShowMore}

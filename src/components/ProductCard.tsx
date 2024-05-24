@@ -1,16 +1,19 @@
-import { products } from '../constants';
-import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa'; // Import star icons
+import React from 'react';
+import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import Button from './Button';
+import { Product } from '../types/productTypes';
 
 type ProductCardProps = {
+    products: Product[];
     showMore?: boolean;
     visibleProducts?: number;
     handleShowMore?: () => void;
 };
 
-const ProductCard = ({
+const ProductCard: React.FC<ProductCardProps> = ({
+    products,
     showMore = true,
-    visibleProducts = products.length,
+    visibleProducts = products.length, // Set visibleProducts directly to products.length
     handleShowMore,
 }: ProductCardProps) => {
     const renderStars = (rating: number) => {
@@ -34,16 +37,22 @@ const ProductCard = ({
 
     return (
         <>
-            <div className="relative flex flex-wrap justify-center gap-x-8 gap-y-12">
+            <div className="relative flex flex-wrap justify-center gap-x-8 gap-y-12 ">
                 {products.slice(0, visibleProducts).map((product) => (
-                    <div className="flex flex-col" key={product.id}>
+                    <div className="relative flex flex-col" key={product.id}>
                         <img
-                            className="w-[292px] h-[318px] rounded-3xl mb-4"
+                            className="w-[292px] h-[318px] mb-4 cursor-pointer rounded-xl"
                             src={product.image}
                             alt={product.name}
                         />
 
-                        <div className="flex items-center justify-between mx-2 mb-1">
+                        <div className="flex justify-end items-center gap-4 mx-3 mb-2">
+                            {renderStars(product.rating)}
+                            <p className="font-poppins text-[0.875rem] md:text-[1rem]">
+                                ({product.popularity})
+                            </p>
+                        </div>
+                        <div className="flex items-center justify-between mx-3 mb-2">
                             <p className="font-poppins font-semibold text-[1rem] md:text-[1.25rem]">
                                 {product.name}
                             </p>
@@ -51,19 +60,12 @@ const ProductCard = ({
                                 ${product.price}
                             </p>
                         </div>
-
-                        <div className="flex  items-center gap-4 mx-2">
-                            {renderStars(product.rating)}
-                            <p className="font-poppins text-[0.875rem] md:text-[1rem]">
-                                ({product.popularity})
-                            </p>
-                        </div>
                     </div>
                 ))}
             </div>
             {handleShowMore && (
                 <div className="flex justify-center mt-14">
-                    <Button onClick={handleShowMore}>
+                    <Button white border onClick={handleShowMore}>
                         {showMore ? 'show more' : 'show less'}
                     </Button>
                 </div>
