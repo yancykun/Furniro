@@ -6,4 +6,5 @@ export type Product = {
     category: string;
     rating: number;
     popularity: number;
+    isFeatured: boolean;
 };

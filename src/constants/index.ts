@@ -33,6 +33,10 @@ import {
     inspiration2,
     inspiration3,
     inspiration4,
+    trophy,
+    guarantee,
+    shipping,
+    support,
 } from '../assets';
 
 export const navigation = [
@@ -105,6 +109,7 @@ export const products = [
         category: 'dining',
         rating: 4.5,
         popularity: 120,
+        isFeatured: false,
     },
     {
         id: '1',
@@ -114,6 +119,7 @@ export const products = [
         category: 'dining',
         rating: 4.0,
         popularity: 95,
+        isFeatured: false,
     },
     {
         id: '2',
@@ -123,6 +129,7 @@ export const products = [
         category: 'dining',
         rating: 4.7,
         popularity: 130,
+        isFeatured: true,
     },
     {
         id: '3',
@@ -132,6 +139,7 @@ export const products = [
         category: 'dining',
         rating: 4.2,
         popularity: 110,
+        isFeatured: false,
     },
     {
         id: '4',
@@ -141,6 +149,7 @@ export const products = [
         category: 'dining',
         rating: 4.3,
         popularity: 85,
+        isFeatured: false,
     },
     {
         id: '5',
@@ -150,6 +159,7 @@ export const products = [
         category: 'living',
         rating: 4.8,
         popularity: 200,
+        isFeatured: true,
     },
     {
         id: '6',
@@ -159,6 +169,7 @@ export const products = [
         category: 'living',
         rating: 4.1,
         popularity: 150,
+        isFeatured: true,
     },
     {
         id: '7',
@@ -168,6 +179,7 @@ export const products = [
         category: 'living',
         rating: 4.6,
         popularity: 175,
+        isFeatured: true,
     },
     {
         id: '8',
@@ -177,6 +189,7 @@ export const products = [
         category: 'living',
         rating: 4.4,
         popularity: 160,
+        isFeatured: true,
     },
     {
         id: '9',
@@ -186,6 +199,7 @@ export const products = [
         category: 'living',
         rating: 4.5,
         popularity: 180,
+        isFeatured: true,
     },
     {
         id: '10',
@@ -195,6 +209,7 @@ export const products = [
         category: 'bedroom',
         rating: 4.7,
         popularity: 210,
+        isFeatured: true,
     },
     {
         id: '11',
@@ -204,6 +219,7 @@ export const products = [
         category: 'bedroom',
         rating: 4.5,
         popularity: 190,
+        isFeatured: true,
     },
     {
         id: '12',
@@ -213,6 +229,7 @@ export const products = [
         category: 'bedroom',
         rating: 4.6,
         popularity: 175,
+        isFeatured: true,
     },
     {
         id: '13',
@@ -222,6 +239,7 @@ export const products = [
         category: 'bedroom',
         rating: 4.4,
         popularity: 160,
+        isFeatured: false,
     },
     {
         id: '14',
@@ -231,6 +249,7 @@ export const products = [
         category: 'bedroom',
         rating: 4.8,
         popularity: 220,
+        isFeatured: true,
     },
     {
         id: '15',
@@ -240,6 +259,7 @@ export const products = [
         category: 'kitchen',
         rating: 4.3,
         popularity: 140,
+        isFeatured: false,
     },
     {
         id: '16',
@@ -249,6 +269,7 @@ export const products = [
         category: 'kitchen',
         rating: 4.5,
         popularity: 180,
+        isFeatured: false,
     },
     {
         id: '17',
@@ -258,6 +279,7 @@ export const products = [
         category: 'kitchen',
         rating: 4.7,
         popularity: 170,
+        isFeatured: false,
     },
     {
         id: '18',
@@ -267,6 +289,7 @@ export const products = [
         category: 'kitchen',
         rating: 4.4,
         popularity: 160,
+        isFeatured: false,
     },
     {
         id: '19',
@@ -276,6 +299,7 @@ export const products = [
         category: 'kitchen',
         rating: 4.6,
         popularity: 200,
+        isFeatured: false,
     },
     {
         id: '20',
@@ -285,6 +309,7 @@ export const products = [
         category: 'workplace',
         rating: 4.2,
         popularity: 120,
+        isFeatured: false,
     },
     {
         id: '21',
@@ -294,6 +319,7 @@ export const products = [
         category: 'workplace',
         rating: 4.0,
         popularity: 110,
+        isFeatured: false,
     },
     {
         id: '22',
@@ -303,6 +329,7 @@ export const products = [
         category: 'workplace',
         rating: 4.1,
         popularity: 100,
+        isFeatured: false,
     },
     {
         id: '23',
@@ -312,6 +339,7 @@ export const products = [
         category: 'workplace',
         rating: 4.3,
         popularity: 130,
+        isFeatured: false,
     },
     {
         id: '24',
@@ -321,6 +349,7 @@ export const products = [
         category: 'workplace',
         rating: 4.2,
         popularity: 140,
+        isFeatured: false,
     },
 ];
 
@@ -358,5 +387,32 @@ export const help = [
         id: 2,
         title: 'Privacy Policies',
         url: '#privacy',
+    },
+];
+
+export const features = [
+    {
+        id: 0,
+        icon: trophy,
+        title: 'High Quality',
+        text: 'crafted from top materials',
+    },
+    {
+        id: 1,
+        icon: guarantee,
+        title: 'Warranty Protection',
+        text: 'Over 2 years',
+    },
+    {
+        id: 2,
+        icon: shipping,
+        title: 'Free Shipping',
+        text: 'Order over 150 $',
+    },
+    {
+        id: 3,
+        icon: support,
+        title: '24/7 Support',
+        text: 'Dedicated Support',
     },
 ];

@@ -52,6 +52,12 @@ import inspiration2 from '../assets/inspiration/inspiration2.jpg';
 import inspiration3 from '../assets/inspiration/inspiration3.jpg';
 import inspiration4 from '../assets/inspiration/inspiration4.jpg';
 
+// Feature icons
+import trophy from '../assets/icons/trophy.png';
+import guarantee from '../assets/icons/guarantee.png';
+import shipping from '../assets/icons/shipping.png';
+import support from '../assets/icons/support.png';
+
 // Extended Header
 import headerImage from '../assets/extendedHeader.jpg';
 
@@ -95,4 +101,8 @@ export {
     inspiration4,
     next,
     headerImage,
+    trophy,
+    guarantee,
+    shipping,
+    support,
 };

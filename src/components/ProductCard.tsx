@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaStar, FaStarHalfAlt, FaRegStar } from 'react-icons/fa';
 import Button from './Button';
 import { Product } from '../types/productTypes';
@@ -10,10 +9,10 @@ type ProductCardProps = {
     handleShowMore?: () => void;
 };
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const ProductCard = ({
     products,
     showMore = true,
-    visibleProducts = products.length, // Set visibleProducts directly to products.length
+    visibleProducts = products.length,
     handleShowMore,
 }: ProductCardProps) => {
     const renderStars = (rating: number) => {
@@ -37,11 +36,11 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
     return (
         <>
-            <div className="relative flex flex-wrap justify-center gap-x-8 gap-y-12 ">
+            <div className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mb-5">
                 {products.slice(0, visibleProducts).map((product) => (
                     <div className="relative flex flex-col" key={product.id}>
                         <img
-                            className="w-[292px] h-[318px] mb-4 cursor-pointer rounded-xl"
+                            className="w-[292px] h-[300px] mb-4 cursor-pointer rounded-xl object-cover"
                             src={product.image}
                             alt={product.name}
                         />

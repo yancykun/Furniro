@@ -5,7 +5,7 @@ import Button from './Button';
 
 const Footer = () => {
     return (
-        <Section customPaddings="pt-[50px] lg:pt-[60px]">
+        <Section>
             <div className="flex flex-col items-center lg:items-start lg:flex-row lg:justify-between lg:px-[100px] py-10 border-t-2 border-b-2">
                 <div className="flex flex-col lg:w-1/3">
                     <p className="font-poppins font-bold text-[1.5rem] mb-[40px] lg:mb-[50px]">

@@ -1,13 +1,16 @@
+import { products } from '../constants';
+
 import ExtendedHeader from '../components/ExtendedHeader';
 import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
-import { products } from '../constants';
+import FeatureShowcase from '../components/FeatureShowcase';
 
 const ShopPage = () => {
     return (
         <>
             <ExtendedHeader />
             <ProductCard products={products} />
+            <FeatureShowcase />
             <Footer />
         </>
     );
