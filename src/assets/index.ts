@@ -6,7 +6,6 @@ import hero from '../assets/hero/heroImage.jpg';
 
 // Icons
 import cart from '../assets/icons/cart.png';
-import next from '../assets/svg/icon-next.svg';
 
 // Category images
 import bedroom from '../assets/categories/bedroom.jpg';
@@ -99,7 +98,6 @@ export {
     inspiration2,
     inspiration3,
     inspiration4,
-    next,
     headerImage,
     trophy,
     guarantee,

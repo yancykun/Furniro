@@ -20,7 +20,7 @@ const FeatureShowcase = () => {
                             <p className="font-poppins text-[1.563rem] font-semibold text-center md:text-start w-full">
                                 {feature.title}
                             </p>
-                            <p className="font-poppins text-[1.25rem] font-medium text-color-6 w-full">
+                            <p className="font-poppins text-[1.25rem] font-medium text-center md:text-start text-color-6 w-full">
                                 {feature.text}
                             </p>
                         </div>

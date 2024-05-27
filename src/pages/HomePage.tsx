@@ -5,7 +5,7 @@ import Product from '../components/Product';
 import Inspiration from '../components/Inspiration';
 import Footer from '../components/Footer';
 
-const Home = () => {
+const HomePage = () => {
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] overflow-hidden">
             <Header />
@@ -18,4 +18,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default HomePage;

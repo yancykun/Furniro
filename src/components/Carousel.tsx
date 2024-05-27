@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { next } from '../assets';
 import { inspiration } from '../constants';
+import ArrowIcon from '../assets/svg/ArrowIcon';
 
 const Carousel = () => {
     const [curr, setCurr] = useState(0);
@@ -27,7 +27,7 @@ const Carousel = () => {
                     className="absolute right-8 top-1/2 transform -translate-y-1/2 w-10 h-10 flex justify-center items-center bg-color-1 rounded-full cursor-pointer"
                     onClick={nextButton}
                 >
-                    <img src={next} alt="next icon" />
+                    <ArrowIcon />
                 </button>
             </div>
             <div className="flex items-center gap-3 justify-center lg:justify-start mt-4">

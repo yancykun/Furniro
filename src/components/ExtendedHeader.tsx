@@ -1,12 +1,11 @@
 import Header from './Header';
-import { headerImage, next } from '../assets';
+import { headerImage } from '../assets';
+import ArrowIcon from '../assets/svg/ArrowIcon';
 import { useLocation } from 'react-router-dom';
-import { navigation, categories } from '../constants';
+import { navigation } from '../constants';
 
 const ExtendedHeader = () => {
     const { pathname } = useLocation();
-
-    const allItems = [...navigation, ...categories];
 
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] mb-[50px] lg:mb-[60px] w-full relative">
@@ -18,7 +17,7 @@ const ExtendedHeader = () => {
                     alt="Header image"
                 />
 
-                {allItems.map((item) => (
+                {navigation.map((item) => (
                     <div
                         key={item.id}
                         className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center text-center"
@@ -31,11 +30,7 @@ const ExtendedHeader = () => {
                                         Home
                                     </p>
 
-                                    <img
-                                        className="w-4 h-5"
-                                        src={next}
-                                        alt="greater than icon"
-                                    />
+                                    <ArrowIcon stroke="#000000" />
                                     <p className="font-poppins font-light">
                                         {item.title}
                                     </p>
