@@ -39,7 +39,7 @@ const BreadcrumbHeader = () => {
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] mb-[50px] lg:mb-[60px] w-full relative">
             <Header />
-            <div className="bg-color-2 py-10 px-10 md:px-20 w-full">
+            <div className="bg-color-2 py-10 px-5 md:px-20 w-full">
                 <div className="flex justify-center md:justify-start items-center gap-4 md:gap-8">
                     {breadcrumbItems.map((item, index) => (
                         <React.Fragment key={index}>
