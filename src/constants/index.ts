@@ -37,6 +37,9 @@ import {
     guarantee,
     shipping,
     support,
+    location,
+    phone,
+    clock,
 } from '../assets';
 
 export const navigation = [
@@ -414,5 +417,28 @@ export const features = [
         icon: support,
         title: '24/7 Support',
         text: 'Dedicated Support',
+    },
+];
+
+export const contactDetails = [
+    {
+        id: 0,
+        image: location,
+        title: 'Address',
+        text: '236 5th SE Avenue, New York NY10000, United States',
+    },
+    {
+        id: 1,
+        image: phone,
+        title: 'Phone',
+        mobile: 'Mobile: +(84) 546-6789',
+        hotline: 'Hotline: +(84) 456-6789',
+    },
+    {
+        id: 2,
+        image: clock,
+        title: 'Working Time',
+        weekdays: 'Monday-Friday: 9:00 - 22:00',
+        weekends: 'Saturday-Sunday: 9:00 - 21:00',
     },
 ];

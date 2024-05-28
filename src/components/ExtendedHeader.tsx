@@ -1,5 +1,5 @@
 import Header from './Header';
-import { headerImage } from '../assets';
+import { furniro, headerImage } from '../assets';
 import ArrowIcon from '../assets/svg/ArrowIcon';
 import { useLocation } from 'react-router-dom';
 import { navigation } from '../constants';
@@ -24,14 +24,19 @@ const ExtendedHeader = () => {
                     >
                         {pathname === item.url && (
                             <>
-                                <p className="h1 mb-4">{item.title}</p>
+                                <img
+                                    className="mb-4"
+                                    src={furniro}
+                                    alt="Furniro logo"
+                                />
+                                <p className="h1 mb-3">{item.title}</p>
                                 <div className="flex justify-center items-center gap-4">
-                                    <p className="font-poppins font-semibold">
+                                    <p className="font-poppins font-light">
                                         Home
                                     </p>
 
                                     <ArrowIcon stroke="#000000" />
-                                    <p className="font-poppins font-light">
+                                    <p className="font-poppins font-semibold">
                                         {item.title}
                                     </p>
                                 </div>

@@ -28,4 +28,8 @@
     .h6 {
         @apply font-poppins font-semibold text-base;
     }
+
+    .input {
+        @apply border border-color-6 py-4 px-8 font-poppins mb-8 rounded-lg focus:border-2 focus:border-color-4 focus:outline-none;
+    }
 }

@@ -1,5 +1,6 @@
 // Logo image
 import logo from '../assets/logo.png';
+import furniro from '../assets/furniro.png';
 
 // Hero section image
 import hero from '../assets/hero/heroImage.jpg';
@@ -60,8 +61,14 @@ import support from '../assets/icons/support.png';
 // Extended Header
 import headerImage from '../assets/extendedHeader.jpg';
 
+// Contact icons
+import location from '../assets/icons/location.png';
+import clock from '../assets/icons/clock.png';
+import phone from '../assets/icons/phone.png';
+
 export {
     logo,
+    furniro,
     cart,
     hero,
     bedroom,
@@ -103,4 +110,7 @@ export {
     guarantee,
     shipping,
     support,
+    clock,
+    location,
+    phone,
 };
