@@ -3,7 +3,6 @@ type ButtonProps = {
     className?: string;
     onClick?: () => void;
     white?: boolean;
-
     border?: boolean;
 };
 
