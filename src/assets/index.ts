@@ -5,8 +5,10 @@ import furniro from '../assets/furniro.png';
 // Hero section image
 import hero from '../assets/hero/heroImage.jpg';
 
-// Icons
+// Cart Icons
 import cart from '../assets/icons/cart.png';
+import cartClose from '../assets/icons/cart-close.png';
+import deleteItem from '../assets/icons/item-delete.png';
 
 // Category images
 import bedroom from '../assets/categories/bedroom.jpg';
@@ -70,6 +72,7 @@ export {
     logo,
     furniro,
     cart,
+    cartClose,
     hero,
     bedroom,
     dining,
@@ -113,4 +116,5 @@ export {
     clock,
     location,
     phone,
+    deleteItem,
 };

@@ -5,17 +5,26 @@ import CategoriesPage from './pages/CategoriesPage';
 import CategoryPage from './pages/CategoryPage';
 import ContactPage from './pages/ContactPage';
 import SingleProductPage from './pages/SingleProductPage';
+import { CartProvider } from './context/CartContext';
 
 const App = () => {
     return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/categories" element={<CategoriesPage />} />
-            <Route path="/categories/:category" element={<CategoryPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/shop/:productId" element={<SingleProductPage />} />
-        </Routes>
+        <CartProvider>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/shop" element={<ShopPage />} />
+                <Route path="/categories" element={<CategoriesPage />} />
+                <Route
+                    path="/categories/:category"
+                    element={<CategoryPage />}
+                />
+                <Route path="/contact" element={<ContactPage />} />
+                <Route
+                    path="/shop/:productId"
+                    element={<SingleProductPage />}
+                />
+            </Routes>
+        </CartProvider>
     );
 };
 

@@ -1,15 +1,16 @@
 import { Link, useLocation } from 'react-router-dom';
 import { disablePageScroll, enablePageScroll } from 'scroll-lock';
-
 import { cart, logo } from '../assets';
 import { navigation } from '../constants';
 import { useState } from 'react';
 import MenuSvg from '../assets/svg/MenuSvg';
+import CardCart from './CardCart';
 
 const Header = () => {
     const location = useLocation();
 
     const [openNavigation, setOpenNavigation] = useState(false);
+    const [openCart, setOpenCart] = useState(false);
 
     const toggleNavigation = () => {
         if (openNavigation) {
@@ -18,6 +19,15 @@ const Header = () => {
         } else {
             setOpenNavigation(true);
             disablePageScroll();
+        }
+    };
+
+    const toggleCart = () => {
+        setOpenCart(!openCart);
+        if (!openCart) {
+            disablePageScroll();
+        } else {
+            enablePageScroll();
         }
     };
 
@@ -70,17 +80,24 @@ const Header = () => {
 
                 <div className="flex items-center justify-center gap-4">
                     <img
+                        onClick={toggleCart}
                         width={25}
                         className="cursor-pointer"
                         src={cart}
                         alt="Cart"
                     />
+
                     <button
                         className="flex lg:hidden"
                         onClick={toggleNavigation}
                     >
                         <MenuSvg openNavigation={openNavigation} />
                     </button>
+                    {openCart && (
+                        <div className="absolute top-0 right-0 w-[80%] sm:w-[417px] h-[700px] z-50 bg-color-1 pt-4 pl-6">
+                            <CardCart toggleCart={toggleCart} />
+                        </div>
+                    )}
                 </div>
             </div>
         </header>

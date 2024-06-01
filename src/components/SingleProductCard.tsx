@@ -2,8 +2,23 @@ import { useParams } from 'react-router-dom';
 import { products } from '../constants';
 import StarRating from './StarRating';
 import Button from './Button';
+import { useState } from 'react';
+import { useCart } from '../hooks/useCart';
 
 const SingleProductCard = () => {
+    const [count, setCount] = useState<number>(1);
+    const { addToCart } = useCart();
+
+    const increment = () => {
+        setCount((count) => count + 1);
+    };
+
+    const decrement = () => {
+        if (count > 1) {
+            setCount((count) => count - 1);
+        }
+    };
+
     const { productId } = useParams();
 
     const product = products.find((product) => product.id === productId);
@@ -11,6 +26,16 @@ const SingleProductCard = () => {
     if (!product) {
         return <p>Product not found!</p>;
     }
+
+    const handleAddToCart = () => {
+        addToCart({
+            id: product.id,
+            title: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: count,
+        });
+    };
 
     return (
         <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-20 px-[2rem] lg:px-[99px] pt-[33px] w-full">
@@ -43,13 +68,19 @@ const SingleProductCard = () => {
                     </p>
                     <div className="flex max-sm:flex-col gap-5 items-center">
                         <div className="flex items-center justify-center gap-6 border border-color-6 h-[55px] w-[120px] rounded-lg">
-                            <button className="font-poppins text-color-7">
+                            <button
+                                onClick={decrement}
+                                className="font-poppins text-color-7"
+                            >
                                 -
                             </button>
                             <p className="font-poppins text-color-7 font-medium">
-                                1
+                                {count}
                             </p>
-                            <button className="font-poppins text-color-7">
+                            <button
+                                onClick={increment}
+                                className="font-poppins text-color-7"
+                            >
                                 +
                             </button>
                         </div>
@@ -57,6 +88,7 @@ const SingleProductCard = () => {
                             white
                             border
                             className="capitalize text-color-7 font-medium border border-color-7 rounded-lg h-[55px]"
+                            onClick={handleAddToCart}
                         >
                             Add to Cart
                         </Button>
