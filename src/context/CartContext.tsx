@@ -16,6 +16,7 @@ type CartContextProps = {
     cart: CartItem[];
     addToCart: (product: CartItem) => void;
     removeFromCart: (id: string) => void;
+    getTotalPrice: () => number;
 };
 
 export const CartContext = createContext<CartContextProps | undefined>(
@@ -49,8 +50,17 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !== id));
     };
 
+    const getTotalPrice = () => {
+        return cart.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+        );
+    };
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart }}>
+        <CartContext.Provider
+            value={{ cart, addToCart, removeFromCart, getTotalPrice }}
+        >
             {children}
         </CartContext.Provider>
     );
