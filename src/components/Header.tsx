@@ -94,7 +94,7 @@ const Header = () => {
                         <MenuSvg openNavigation={openNavigation} />
                     </button>
                     {openCart && (
-                        <div className="absolute top-0 right-0 w-[80%] sm:w-[417px] h-[700px] z-50 bg-color-1 pt-4 pl-6">
+                        <div className="absolute top-0 right-0 w-[90%] sm:w-[417px] h-[700px] z-50 bg-color-1 pt-4">
                             <CardCart toggleCart={toggleCart} />
                         </div>
                     )}

@@ -10,20 +10,20 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
     const { cart, removeFromCart, getTotalPrice } = useCart();
 
     return (
-        <div className="relative shadow-md h-[746px]">
-            <div className="pb-6 pl-4 border-b">
-                <h2 className="font-poppins text-base md:text-2xl font-semibold md:pt-4">
-                    Shooping Cart
+        <div className="relative shadow-md h-auto  flex flex-col">
+            <div className="pb-6 border-b pl-4">
+                <h2 className="font-poppins text-base md:text-xl lg:text-2xl font-semibold md:pt-4">
+                    Shopping Cart
                 </h2>
                 <img
                     src={cartClose}
                     alt="cart close icon"
                     width={20}
-                    className="cursor-pointer absolute top-0 md:top-4 right-[3.5rem] md:right-[6rem] lg:right-[4rem]  "
+                    className="cursor-pointer absolute top-0 md:top-4 right-[3.5rem] md:right-[6rem] lg:right-[4rem]"
                     onClick={toggleCart}
                 />
             </div>
-            <div className="py-6 px-4 flex flex-col gap-4">
+            <div className="flex-1 overflow-auto py-6 px-4">
                 {cart.length === 0 ? (
                     <p className="font-poppins font-medium text-lg pl-4">
                         Your cart is empty
@@ -31,15 +31,15 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                 ) : (
                     cart.map((item) => (
                         <React.Fragment key={item.id}>
-                            <div className="flex items-center gap-4">
-                                <div className="w-full">
+                            <div className="flex items-center gap-4 mb-4">
+                                <div className="w-[120px]">
                                     <img
-                                        className="w-[108px] h-[105px] object-cover rounded-xl"
+                                        className="w-full h-[110px] object-cover rounded-xl"
                                         src={item.image}
                                         alt={item.title}
                                     />
                                 </div>
-                                <div className="w-full grid gap-1">
+                                <div className="flex flex-col items-center sm:items-start gap-1 flex-1">
                                     <p className="font-poppins text-base">
                                         {item.title}
                                     </p>
@@ -55,20 +55,25 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="w-full">
+                                <div className="w-[40px] flex justify-center">
                                     <img
                                         onClick={() => removeFromCart(item.id)}
                                         src={deleteItem}
                                         alt="delete icon"
+                                        className="cursor-pointer"
                                     />
                                 </div>
                             </div>
                         </React.Fragment>
                     ))
                 )}
-                <div className="flex gap-20">
-                    <p>Subtotal</p>
-                    <p>${getTotalPrice().toFixed(2)}</p>
+            </div>
+            <div className="p-4 border-t mt-auto">
+                <div className="flex justify-between">
+                    <p className="font-poppins font-semibold">Subtotal</p>
+                    <p className="font-poppins font-semibold">
+                        ${getTotalPrice().toFixed(2)}
+                    </p>
                 </div>
             </div>
         </div>
