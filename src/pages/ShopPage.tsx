@@ -5,10 +5,10 @@ import Footer from '../components/Footer';
 import ProductCard from '../components/ProductCard';
 import FeatureShowcase from '../components/FeatureShowcase';
 
-const ShopPage = () => {
+const ShopPage = ({ toggleCart, openCart }) => {
     return (
         <>
-            <ExtendedHeader />
+            <ExtendedHeader toggleCart={toggleCart} openCart={openCart} />
             <ProductCard products={products} />
             <FeatureShowcase />
             <Footer />

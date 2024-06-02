@@ -5,10 +5,10 @@ import Product from '../components/Product';
 import Inspiration from '../components/Inspiration';
 import Footer from '../components/Footer';
 
-const HomePage = () => {
+const HomePage = ({ toggleCart, openCart }) => {
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] overflow-hidden">
-            <Header />
+            <Header toggleCart={toggleCart} openCart={openCart} />
             <Hero />
             <Categories />
             <Product />

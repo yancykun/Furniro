@@ -4,12 +4,12 @@ import ArrowIcon from '../assets/svg/ArrowIcon';
 import { useLocation } from 'react-router-dom';
 import { navigation } from '../constants';
 
-const ExtendedHeader = () => {
+const ExtendedHeader = ({ toggleCart, openCart }) => {
     const { pathname } = useLocation();
 
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] mb-[50px] lg:mb-[60px] w-full relative">
-            <Header />
+            <Header toggleCart={toggleCart} openCart={openCart} />
             <div className="relative">
                 <img
                     className="w-full h-[310px] object-cover opacity-40"
