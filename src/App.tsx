@@ -42,15 +42,41 @@ const App = () => {
                         <ShopPage toggleCart={toggleCart} openCart={openCart} />
                     }
                 />
-                <Route path="/categories" element={<CategoriesPage />} />
+                <Route
+                    path="/categories"
+                    element={
+                        <CategoriesPage
+                            toggleCart={toggleCart}
+                            openCart={openCart}
+                        />
+                    }
+                />
                 <Route
                     path="/categories/:category"
-                    element={<CategoryPage />}
+                    element={
+                        <CategoryPage
+                            toggleCart={toggleCart}
+                            openCart={openCart}
+                        />
+                    }
                 />
-                <Route path="/contact" element={<ContactPage />} />
+                <Route
+                    path="/contact"
+                    element={
+                        <ContactPage
+                            toggleCart={toggleCart}
+                            openCart={openCart}
+                        />
+                    }
+                />
                 <Route
                     path="/shop/:productId"
-                    element={<SingleProductPage />}
+                    element={
+                        <SingleProductPage
+                            toggleCart={toggleCart}
+                            openCart={openCart}
+                        />
+                    }
                 />
             </Routes>
             {openCart && (

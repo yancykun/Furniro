@@ -3,8 +3,9 @@ import Header from './Header';
 import ArrowIcon from '../assets/svg/ArrowIcon';
 import { useLocation } from 'react-router-dom';
 import { categories, navigation, products } from '../constants';
+import { CartProps } from '../types/cartTypes';
 
-const BreadcrumbHeader = () => {
+const BreadcrumbHeader = ({ toggleCart, openCart }: CartProps) => {
     const location = useLocation();
     const pathSegments = location.pathname.split('/').filter(Boolean);
 
@@ -55,7 +56,7 @@ const BreadcrumbHeader = () => {
 
     return (
         <div className="pt-[3.5rem] md:pt-[5rem] w-full relative">
-            <Header />
+            <Header toggleCart={toggleCart} openCart={openCart} />
             <div className="bg-color-2 py-10 px-5 md:px-20 w-full">
                 <div className="flex justify-center md:justify-start items-center gap-4 md:gap-8">
                     {breadcrumbItems.map((item, index) => (

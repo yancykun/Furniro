@@ -3,8 +3,9 @@ import { furniro, headerImage } from '../assets';
 import ArrowIcon from '../assets/svg/ArrowIcon';
 import { useLocation } from 'react-router-dom';
 import { navigation } from '../constants';
+import { CartProps } from '../types/cartTypes';
 
-const ExtendedHeader = ({ toggleCart, openCart }) => {
+const ExtendedHeader = ({ toggleCart, openCart }: CartProps) => {
     const { pathname } = useLocation();
 
     return (

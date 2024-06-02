@@ -5,8 +5,9 @@ import { navigation } from '../constants';
 import { useState } from 'react';
 import MenuSvg from '../assets/svg/MenuSvg';
 import CardCart from './CardCart';
+import { CartProps } from '../types/cartTypes';
 
-const Header = ({ toggleCart, openCart }) => {
+const Header = ({ toggleCart, openCart }: CartProps) => {
     const location = useLocation();
     const [openNavigation, setOpenNavigation] = useState(false);
 
