@@ -16,7 +16,7 @@ const Button = ({
     const classes = `button relative inline-flex items-center justify-center w-[12.5rem] h-[3.125rem] cursor-pointer
     ${className} ${
         white ? 'bg-color-1 text-color-4' : 'bg-color-4 text-color-1'
-    } ${border ? 'border-2 border-color-4' : 'border-none'} `;
+    } ${border ? 'border border-color-4 hover:border-2' : 'border-none'} `;
 
     const spanClass = `relative z-10`;
 

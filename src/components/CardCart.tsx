@@ -1,6 +1,7 @@
 import React from 'react';
 import { cartClose, deleteItem } from '../assets';
 import { useCart } from '../hooks/useCart';
+import Button from './Button';
 
 type CardCartProps = {
     toggleCart: () => void;
@@ -10,7 +11,7 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
     const { cart, removeFromCart, getTotalPrice } = useCart();
 
     return (
-        <div className="relative shadow-md h-auto  flex flex-col">
+        <div className="relative flex flex-col max-h-screen">
             <div className="pb-6 border-b pl-4">
                 <h2 className="font-poppins text-base md:text-xl lg:text-2xl font-semibold md:pt-4">
                     Shopping Cart
@@ -23,7 +24,7 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                     onClick={toggleCart}
                 />
             </div>
-            <div className="flex-1 overflow-auto py-6 px-4">
+            <div className="flex-1 overflow-auto py-6 px-4 max-h-[400px]">
                 {cart.length === 0 ? (
                     <p className="font-poppins font-medium text-lg pl-4">
                         Your cart is empty
@@ -39,7 +40,7 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                                         alt={item.title}
                                     />
                                 </div>
-                                <div className="flex flex-col items-center sm:items-start gap-1 flex-1">
+                                <div className="flex flex-col justify-center items-center gap-1 flex-1">
                                     <p className="font-poppins text-base">
                                         {item.title}
                                     </p>
@@ -68,13 +69,29 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                     ))
                 )}
             </div>
-            <div className="p-4 border-t mt-auto">
+            <div className="p-4 border-b">
                 <div className="flex justify-between">
                     <p className="font-poppins font-semibold">Subtotal</p>
                     <p className="font-poppins font-semibold">
                         ${getTotalPrice().toFixed(2)}
                     </p>
                 </div>
+            </div>
+            <div className="flex gap-4 px-4 py-4">
+                <Button
+                    white
+                    border
+                    className="font-poppins capitalize font-normal text-xs text-color-7 border-color-7 rounded-[50px] h-[30px] w-[87px]"
+                >
+                    Cart
+                </Button>
+                <Button
+                    white
+                    border
+                    className="font-poppins capitalize font-normal text-xs text-color-7 border-color-7 rounded-[50px] h-[30px] w-[87px]"
+                >
+                    Checkout
+                </Button>
             </div>
         </div>
     );

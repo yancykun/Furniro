@@ -41,7 +41,7 @@ const SingleProductCard = () => {
         <div className="flex flex-col md:flex-row justify-center gap-10 md:gap-20 px-[2rem] lg:px-[99px] pt-[33px] w-full">
             <div className="flex justify-center md:justify-end w-full">
                 <img
-                    className="w-[350px] h-[400px]"
+                    className="w-[350px] h-[400px] rounded-xl"
                     src={product.image}
                     alt={product.name}
                 />
@@ -67,10 +67,10 @@ const SingleProductCard = () => {
                         {product.description}
                     </p>
                     <div className="flex max-sm:flex-col gap-5 items-center">
-                        <div className="flex items-center justify-center gap-6 border border-color-6 h-[55px] w-[120px] rounded-lg">
+                        <div className="flex items-center justify-center gap-6 border border-color-6 h-[55px] w-[120px] rounded-lg hover:border-2 hover:border-color-7">
                             <button
                                 onClick={decrement}
-                                className="font-poppins text-color-7"
+                                className="font-poppins text-color-7 hover:font-bold"
                             >
                                 -
                             </button>
@@ -79,7 +79,7 @@ const SingleProductCard = () => {
                             </p>
                             <button
                                 onClick={increment}
-                                className="font-poppins text-color-7"
+                                className="font-poppins text-color-7 hover:font-bold"
                             >
                                 +
                             </button>
