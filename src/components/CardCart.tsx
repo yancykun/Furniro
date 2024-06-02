@@ -40,7 +40,7 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
                                         alt={item.title}
                                     />
                                 </div>
-                                <div className="flex flex-col justify-center items-center gap-1 flex-1">
+                                <div className="flex flex-col items-center sm:items-start gap-1 flex-1">
                                     <p className="font-poppins text-base">
                                         {item.title}
                                     </p>

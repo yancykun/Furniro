@@ -91,10 +91,10 @@ const Header = () => {
                     {openCart && (
                         <>
                             <div
-                                className="fixed inset-0 bg-color-6 opacity-70 z-40"
+                                className="fixed inset-0 bg-color-6 bg-opacity-70 z-40"
                                 onClick={toggleCart}
                             ></div>
-                            <div className="fixed top-0 right-0 w-[90%] sm:w-[417px] h-[90vh] z-50 bg-color-1 pt-4">
+                            <div className="absolute top-0 right-0 w-[90%] sm:w-[417px] h-[700px] z-50 bg-color-1 pt-4">
                                 <CardCart toggleCart={toggleCart} />
                             </div>
                         </>
