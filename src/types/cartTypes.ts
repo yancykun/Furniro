@@ -1,4 +1,4 @@
 export type CartProps = {
-    toggleCart: () => void;
-    openCart: boolean;
+  toggleCart: () => void;
+  openCart: boolean;
 };

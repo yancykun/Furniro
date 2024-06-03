@@ -1,53 +1,50 @@
-import Header from './Header';
-import { furniro, headerImage } from '../assets';
-import ArrowIcon from '../assets/svg/ArrowIcon';
-import { useLocation } from 'react-router-dom';
-import { navigation } from '../constants';
-import { CartProps } from '../types/cartTypes';
+import Header from "./Header";
+import { furniro, headerImage } from "../assets";
+import ArrowIcon from "../assets/svg/ArrowIcon";
+import { useLocation } from "react-router-dom";
+import { navigation } from "../constants";
+import { CartProps } from "../types/cartTypes";
 
-const ExtendedHeader = ({ toggleCart, openCart }: CartProps) => {
-    const { pathname } = useLocation();
+interface ExtendedHeaderProps extends CartProps {
+  customTitle?: string;
+}
 
-    return (
-        <div className="pt-[3.5rem] md:pt-[5rem] mb-[50px] lg:mb-[60px] w-full relative">
-            <Header toggleCart={toggleCart} openCart={openCart} />
-            <div className="relative">
-                <img
-                    className="w-full h-[310px] object-cover opacity-40"
-                    src={headerImage}
-                    alt="Header image"
-                />
+const ExtendedHeader = ({
+  toggleCart,
+  openCart,
+  customTitle,
+}: ExtendedHeaderProps) => {
+  const { pathname } = useLocation();
 
-                {navigation.map((item) => (
-                    <div
-                        key={item.id}
-                        className="absolute top-0 left-0 right-0 bottom-0 flex flex-col justify-center items-center text-center"
-                    >
-                        {pathname === item.url && (
-                            <>
-                                <img
-                                    className="mb-4"
-                                    src={furniro}
-                                    alt="Furniro logo"
-                                />
-                                <p className="h1 mb-3">{item.title}</p>
-                                <div className="flex justify-center items-center gap-4">
-                                    <p className="font-poppins font-light">
-                                        Home
-                                    </p>
+  const currentNavItem = navigation.find((item) => item.url === pathname);
 
-                                    <ArrowIcon stroke="#000000" />
-                                    <p className="font-poppins font-semibold">
-                                        {item.title}
-                                    </p>
-                                </div>
-                            </>
-                        )}
-                    </div>
-                ))}
+  const title = customTitle || currentNavItem?.title;
+
+  return (
+    <div className="relative mb-[50px] w-full pt-[3.5rem] md:pt-[5rem] lg:mb-[60px]">
+      <Header toggleCart={toggleCart} openCart={openCart} />
+      <div className="relative">
+        <img
+          className="h-[310px] w-full object-cover opacity-40"
+          src={headerImage}
+          alt="Header image"
+        />
+
+        {title && (
+          <div className="absolute bottom-0 left-0 right-0 top-0 flex flex-col items-center justify-center text-center">
+            <img className="mb-4" src={furniro} alt="Furniro logo" />
+            <p className="h1 mb-3">{title}</p>
+            <div className="flex items-center justify-center gap-4">
+              <p className="font-poppins font-light">Home</p>
+
+              <ArrowIcon stroke="#000000" />
+              <p className="font-poppins font-semibold">{title}</p>
             </div>
-        </div>
-    );
+          </div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default ExtendedHeader;

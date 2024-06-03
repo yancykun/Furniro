@@ -1,102 +1,97 @@
-import { Link, useLocation } from 'react-router-dom';
-import { disablePageScroll, enablePageScroll } from 'scroll-lock';
-import { cart, logo } from '../assets';
-import { navigation } from '../constants';
-import { useState } from 'react';
-import MenuSvg from '../assets/svg/MenuSvg';
-import CardCart from './CardCart';
-import { CartProps } from '../types/cartTypes';
+import { Link, useLocation } from "react-router-dom";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
+import { cart, logo } from "../assets";
+import { navigation } from "../constants";
+import { useState } from "react";
+import MenuSvg from "../assets/svg/MenuSvg";
+import CardCart from "./CardCart";
+import { CartProps } from "../types/cartTypes";
 
 const Header = ({ toggleCart, openCart }: CartProps) => {
-    const location = useLocation();
-    const [openNavigation, setOpenNavigation] = useState(false);
+  const location = useLocation();
+  const [openNavigation, setOpenNavigation] = useState(false);
 
-    const toggleNavigation = () => {
-        if (openNavigation) {
-            setOpenNavigation(false);
-            enablePageScroll();
-        } else {
-            setOpenNavigation(true);
-            disablePageScroll();
-        }
-    };
+  const toggleNavigation = () => {
+    if (openNavigation) {
+      setOpenNavigation(false);
+      enablePageScroll();
+    } else {
+      setOpenNavigation(true);
+      disablePageScroll();
+    }
+  };
 
-    const handleClick = () => {
-        if (!openNavigation) return;
-        enablePageScroll();
-        setOpenNavigation(false);
-    };
+  const handleClick = () => {
+    if (!openNavigation) return;
+    enablePageScroll();
+    setOpenNavigation(false);
+  };
 
-    return (
-        <header
-            className={`fixed top-0 left-0 w-full z-50 ${
-                openNavigation
-                    ? 'bg-color-1 h-[100%]'
-                    : 'bg-color-1/90 backdrop-blur-md'
-            }`}
+  return (
+    <header
+      className={`fixed left-0 top-0 z-50 w-full ${
+        openNavigation
+          ? "h-[100%] bg-color-1"
+          : "bg-color-1/90 backdrop-blur-md"
+      }`}
+    >
+      <div className="flex items-center justify-between px-[1rem] py-[0.875rem] md:px-[4rem] md:py-[1.25rem]">
+        <Link to="/" className="block w-32 md:w-48">
+          <img
+            src={logo}
+            alt="Furnito logo"
+            className="block h-auto w-auto max-w-full"
+          />
+        </Link>
+
+        <nav
+          className={`${
+            openNavigation ? "flex bg-white" : "hidden"
+          } fixed bottom-0 left-0 right-0 top-[5rem] lg:static lg:mx-auto lg:flex`}
         >
-            <div className="flex items-center justify-between py-[0.875rem] px-[1rem] md:py-[1.25rem] md:px-[4rem]">
-                <Link to="/" className="block w-32 md:w-48">
-                    <img
-                        src={logo}
-                        alt="Furnito logo"
-                        className="block w-auto max-w-full h-auto"
-                    />
-                </Link>
+          <div className="z-2 relative m-auto flex flex-col items-center justify-center gap-8 lg:flex-row">
+            {navigation.map((item) => (
+              <Link
+                to={item.url}
+                key={item.id}
+                className={`relative block font-poppins text-lg font-semibold text-color-7 transition-colors hover:text-color-4 ${
+                  item.url === location.pathname ? "z-2 lg:text-color-4" : ""
+                }`}
+                onClick={handleClick}
+              >
+                {item.title}
+              </Link>
+            ))}
+          </div>
+        </nav>
 
-                <nav
-                    className={`${
-                        openNavigation ? 'flex bg-white' : 'hidden'
-                    } fixed top-[5rem] bottom-0 right-0 left-0 lg:static lg:flex lg:mx-auto`}
-                >
-                    <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row gap-8">
-                        {navigation.map((item) => (
-                            <Link
-                                to={item.url}
-                                key={item.id}
-                                className={`block relative font-poppins text-lg text-color-7 font-semibold transition-colors hover:text-color-4 ${
-                                    item.url === location.pathname
-                                        ? 'z-2 lg:text-color-4'
-                                        : ''
-                                }`}
-                                onClick={handleClick}
-                            >
-                                {item.title}
-                            </Link>
-                        ))}
-                    </div>
-                </nav>
+        <div className="flex items-center justify-center gap-4">
+          <img
+            onClick={toggleCart}
+            width={25}
+            className="cursor-pointer"
+            src={cart}
+            alt="Cart"
+          />
 
-                <div className="flex items-center justify-center gap-4">
-                    <img
-                        onClick={toggleCart}
-                        width={25}
-                        className="cursor-pointer"
-                        src={cart}
-                        alt="Cart"
-                    />
-
-                    <button
-                        className="flex lg:hidden"
-                        onClick={toggleNavigation}
-                    >
-                        <MenuSvg openNavigation={openNavigation} />
-                    </button>
-                </div>
-            </div>
-            {openCart && (
-                <>
-                    <div
-                        className="fixed inset-0 bg-color-6 bg-opacity-70 z-40"
-                        onClick={toggleCart}
-                    ></div>
-                    <div className="absolute top-0 right-0 w-[90%] sm:w-[417px] h-[700px] z-50 bg-color-1 pt-4">
-                        <CardCart toggleCart={toggleCart} />
-                    </div>
-                </>
-            )}
-        </header>
-    );
+          <button className="flex lg:hidden" onClick={toggleNavigation}>
+            <MenuSvg openNavigation={openNavigation} />
+          </button>
+        </div>
+      </div>
+      {openCart && (
+        <>
+          <div
+            className="fixed inset-0 z-40 bg-color-6 bg-opacity-70"
+            onClick={toggleCart}
+          ></div>
+          <div className="absolute right-0 top-0 z-50 h-[90%] w-[90%] bg-color-1 pt-4 sm:w-[417px]">
+            <CardCart toggleCart={toggleCart} />
+          </div>
+        </>
+      )}
+    </header>
+  );
 };
 
 export default Header;
