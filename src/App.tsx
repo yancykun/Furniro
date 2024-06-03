@@ -11,6 +11,7 @@ import Header from "./components/Header";
 import CardCart from "./components/CardCart";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import CartPage from "./pages/CartPage";
+import BillingPage from "./pages/BillingPage";
 
 const App = () => {
   const [openCart, setOpenCart] = useState(false);
@@ -63,7 +64,12 @@ const App = () => {
           path="/cart"
           element={<CartPage toggleCart={toggleCart} openCart={openCart} />}
         />
+        <Route
+          path="/billing"
+          element={<BillingPage toggleCart={toggleCart} openCart={openCart} />}
+        />
       </Routes>
+
       {openCart && (
         <>
           <div

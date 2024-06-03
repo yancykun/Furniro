@@ -1,6 +1,7 @@
 import { trashcan } from "../assets";
 import { useCart } from "../hooks/useCart";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 const CartTable = () => {
   const { cart, removeFromCart } = useCart();
@@ -95,13 +96,15 @@ const CartTable = () => {
           <span className="text-color-7">Total:</span>
           <span className="text-color-4">${calculateTotal()}</span>
         </div>
-        <Button
-          white
-          border
-          className="rounded-xl border-color-7 bg-color-2 text-[1.25rem] font-normal capitalize text-color-7 hover:border-color-4"
-        >
-          Check Out
-        </Button>
+        <Link to="/billing">
+          <Button
+            white
+            border
+            className="rounded-xl border-color-7 bg-color-2 text-[1.25rem] font-normal capitalize text-color-7 hover:border-color-4"
+          >
+            Check Out
+          </Button>
+        </Link>
       </div>
     </div>
   );

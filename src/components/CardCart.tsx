@@ -85,13 +85,15 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
           </Button>
         </Link>
 
-        <Button
-          white
-          border
-          className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"
-        >
-          Checkout
-        </Button>
+        <Link to="/billing">
+          <Button
+            white
+            border
+            className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"
+          >
+            Checkout
+          </Button>
+        </Link>
       </div>
     </div>
   );
