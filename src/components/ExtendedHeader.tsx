@@ -3,16 +3,16 @@ import { furniro, headerImage } from "../assets";
 import ArrowIcon from "../assets/svg/ArrowIcon";
 import { useLocation } from "react-router-dom";
 import { navigation } from "../constants";
-import { CartProps } from "../types/cartTypes";
+import { CartSidebarProps } from "../types/cartSidebarProps";
 
-interface ExtendedHeaderProps extends CartProps {
+interface ExtendedHeaderProps extends CartSidebarProps {
   customTitle?: string;
 }
 
 const ExtendedHeader = ({
-  toggleCart,
-  openCart,
   customTitle,
+  openCart,
+  toggleCartSidebar,
 }: ExtendedHeaderProps) => {
   const { pathname } = useLocation();
 
@@ -22,7 +22,7 @@ const ExtendedHeader = ({
 
   return (
     <div className="relative mb-[50px] w-full pt-[3.5rem] md:pt-[5rem] lg:mb-[60px]">
-      <Header toggleCart={toggleCart} openCart={openCart} />
+      <Header openCart={openCart} toggleCartSidebar={toggleCartSidebar} />
       <div className="relative">
         <img
           className="h-[310px] w-full object-cover opacity-40"

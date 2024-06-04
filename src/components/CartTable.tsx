@@ -32,7 +32,7 @@ const CartTable = () => {
               <tr>
                 <td
                   colSpan={5}
-                  className="px-4 py-2 text-center font-poppins text-lg font-medium"
+                  className="px-4 py-2 text-center font-poppins text-xl font-semibold"
                 >
                   Your cart is empty
                 </td>

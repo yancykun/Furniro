@@ -1,5 +1,4 @@
 import Section from "./Section";
-import Button from "./Button";
 import Carousel from "./Carousel";
 
 const Inspiration = () => {
@@ -13,7 +12,6 @@ const Inspiration = () => {
           Our designer already made a lot of beautiful prototypes of rooms that
           inspire you
         </p>
-        <Button className="max-md:mb-6">Explore More</Button>
       </div>
 
       <div className="flex flex-1 justify-center lg:justify-end">

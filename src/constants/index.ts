@@ -479,7 +479,7 @@ export const help = [
   {
     id: 0,
     title: "Payment Options",
-    url: "#payment",
+    url: "/billing",
   },
   {
     id: 1,

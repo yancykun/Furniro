@@ -2,12 +2,15 @@ import ExtendedHeader from "../components/ExtendedHeader";
 import Footer from "../components/Footer";
 import FeatureShowcase from "../components/FeatureShowcase";
 import CategoryShowcase from "../components/CategoryShowcase";
-import { CartProps } from "../types/cartTypes";
+import { CartSidebarProps } from "../types/cartSidebarProps";
 
-const CategoriesPage = ({ openCart, toggleCart }: CartProps) => {
+const CategoriesPage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   return (
     <>
-      <ExtendedHeader openCart={openCart} toggleCart={toggleCart} />
+      <ExtendedHeader
+        toggleCartSidebar={toggleCartSidebar}
+        openCart={openCart}
+      />
       <CategoryShowcase />
       <FeatureShowcase />
       <Footer />

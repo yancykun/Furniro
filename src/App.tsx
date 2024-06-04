@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ShopPage from "./pages/ShopPage";
@@ -7,79 +6,102 @@ import CategoryPage from "./pages/CategoryPage";
 import ContactPage from "./pages/ContactPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import { CartProvider } from "./context/CartContext";
-import Header from "./components/Header";
-import CardCart from "./components/CardCart";
-import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
+import { useState } from "react";
+import Header from "./components/Header";
+import CartSidebar from "./components/CartSidebar";
 
 const App = () => {
   const [openCart, setOpenCart] = useState(false);
 
-  const toggleCart = () => {
+  const toggleCartSidebar = () => {
     const newState = !openCart;
-
     setOpenCart(newState);
-
-    if (newState) {
-      disablePageScroll();
-    } else {
-      enablePageScroll();
-    }
   };
 
   return (
     <CartProvider>
-      <Header toggleCart={toggleCart} openCart={openCart} />
+      {openCart && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
+      <Header openCart={openCart} toggleCartSidebar={toggleCartSidebar} />
       <Routes>
         <Route
           path="/"
-          element={<HomePage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <HomePage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
         <Route
           path="/shop"
-          element={<ShopPage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <ShopPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
         <Route
           path="/categories"
           element={
-            <CategoriesPage toggleCart={toggleCart} openCart={openCart} />
+            <CategoriesPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
           }
         />
         <Route
           path="/categories/:category"
-          element={<CategoryPage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <CategoryPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
         <Route
           path="/contact"
-          element={<ContactPage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <ContactPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
         <Route
           path="/shop/:productId"
           element={
-            <SingleProductPage toggleCart={toggleCart} openCart={openCart} />
+            <SingleProductPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
           }
         />
         <Route
           path="/cart"
-          element={<CartPage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <CartPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
         <Route
           path="/billing"
-          element={<BillingPage toggleCart={toggleCart} openCart={openCart} />}
+          element={
+            <BillingPage
+              toggleCartSidebar={toggleCartSidebar}
+              openCart={openCart}
+            />
+          }
         />
       </Routes>
-
       {openCart && (
-        <>
-          <div
-            className="fixed inset-0 z-40 bg-color-6 bg-opacity-70"
-            onClick={toggleCart}
-          ></div>
-          <div className="absolute right-0 top-0 z-50 h-[700px] w-[90%] bg-color-1 pt-4 sm:w-[417px]">
-            <CardCart toggleCart={toggleCart} />
-          </div>
-        </>
+        <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
+          <CartSidebar toggleCartSidebar={toggleCartSidebar} />
+        </div>
       )}
     </CartProvider>
   );

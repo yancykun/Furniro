@@ -4,30 +4,30 @@ import { useCart } from "../hooks/useCart";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-type CardCartProps = {
-  toggleCart: () => void;
+type CartSidebarProps = {
+  toggleCartSidebar: () => void;
 };
 
-const CardCart = ({ toggleCart }: CardCartProps) => {
+const CartSidebar = ({ toggleCartSidebar }: CartSidebarProps) => {
   const { cart, removeFromCart, getTotalPrice } = useCart();
 
   return (
-    <div className="relative flex max-h-screen flex-col">
-      <div className="border-b pb-6 pl-4">
-        <h2 className="font-poppins text-base font-semibold md:pt-4 md:text-xl lg:text-2xl">
+    <div className="relative flex h-full flex-col bg-color-1 shadow-lg">
+      <div className="m-6 flex justify-between border-b border-color-6/30 pb-6">
+        <h2 className="font-poppins text-base font-semibold md:text-xl lg:text-2xl">
           Shopping Cart
         </h2>
         <img
           src={cartClose}
           alt="cart close icon"
           width={20}
-          className="absolute right-[3.5rem] top-0 cursor-pointer md:right-[6rem] md:top-4 lg:right-[4rem]"
-          onClick={toggleCart}
+          onClick={toggleCartSidebar}
+          className="cursor-pointer"
         />
       </div>
-      <div className="max-h-[400px] flex-1 overflow-auto px-4 py-6">
+      <div className="max-h-[400px] flex-1 overflow-auto px-4">
         {cart.length === 0 ? (
-          <p className="pl-4 font-poppins text-lg font-medium">
+          <p className="px-4 pt-8 text-center font-poppins text-xl font-semibold">
             Your cart is empty
           </p>
         ) : (
@@ -66,10 +66,10 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
           ))
         )}
       </div>
-      <div className="border-b p-4">
+      <div className="mx-4 border-b border-color-6/30 pb-4">
         <div className="flex justify-between">
           <p className="font-poppins font-semibold">Subtotal</p>
-          <p className="font-poppins font-semibold">
+          <p className="font-poppins font-semibold text-color-4">
             ${getTotalPrice().toFixed(2)}
           </p>
         </div>
@@ -99,4 +99,4 @@ const CardCart = ({ toggleCart }: CardCartProps) => {
   );
 };
 
-export default CardCart;
+export default CartSidebar;

@@ -4,10 +4,10 @@ import { cart, logo } from "../assets";
 import { navigation } from "../constants";
 import { useState } from "react";
 import MenuSvg from "../assets/svg/MenuSvg";
-import CardCart from "./CardCart";
-import { CartProps } from "../types/cartTypes";
+import CartSidebar from "./CartSidebar";
+import { CartSidebarProps } from "../types/cartSidebarProps";
 
-const Header = ({ toggleCart, openCart }: CartProps) => {
+const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   const location = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
 
@@ -46,7 +46,7 @@ const Header = ({ toggleCart, openCart }: CartProps) => {
 
         <nav
           className={`${
-            openNavigation ? "flex bg-white" : "hidden"
+            openNavigation ? "flex bg-color-1" : "hidden"
           } fixed bottom-0 left-0 right-0 top-[5rem] lg:static lg:mx-auto lg:flex`}
         >
           <div className="z-2 relative m-auto flex flex-col items-center justify-center gap-8 lg:flex-row">
@@ -67,8 +67,8 @@ const Header = ({ toggleCart, openCart }: CartProps) => {
 
         <div className="flex items-center justify-center gap-4">
           <img
-            onClick={toggleCart}
             width={25}
+            onClick={toggleCartSidebar}
             className="cursor-pointer"
             src={cart}
             alt="Cart"
@@ -78,18 +78,16 @@ const Header = ({ toggleCart, openCart }: CartProps) => {
             <MenuSvg openNavigation={openNavigation} />
           </button>
         </div>
+
+        {openCart && (
+          <>
+            <div className="fixed inset-0 z-40 bg-color-7/40"></div>
+            <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
+              <CartSidebar toggleCartSidebar={toggleCartSidebar} />
+            </div>
+          </>
+        )}
       </div>
-      {openCart && (
-        <>
-          <div
-            className="fixed inset-0 z-40 bg-color-6 bg-opacity-70"
-            onClick={toggleCart}
-          ></div>
-          <div className="absolute right-0 top-0 z-50 h-[90%] w-[90%] bg-color-1 pt-4 sm:w-[417px]">
-            <CardCart toggleCart={toggleCart} />
-          </div>
-        </>
-      )}
     </header>
   );
 };

@@ -3,14 +3,14 @@ import ExtendedHeader from "../components/ExtendedHeader";
 import FeatureShowcase from "../components/FeatureShowcase";
 import Footer from "../components/Footer";
 import Section from "../components/Section";
-import { CartProps } from "../types/cartTypes";
+import { CartSidebarProps } from "../types/cartSidebarProps";
 
-const BillingPage = ({ openCart, toggleCart }: CartProps) => {
+const BillingPage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   return (
     <Section>
       <ExtendedHeader
+        toggleCartSidebar={toggleCartSidebar}
         openCart={openCart}
-        toggleCart={toggleCart}
         customTitle="Billing"
       />
       <Billing />
