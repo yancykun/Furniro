@@ -22,7 +22,9 @@ const Hero = () => {
             Explore now!
           </p>
           <Link to="/shop">
-            <Button className="h-[3.375rem] md:h-[4.375rem]">Shop now</Button>
+            <Button className="h-[3.375rem] uppercase md:h-[4.375rem]">
+              Shop now
+            </Button>
           </Link>
         </div>
       </div>

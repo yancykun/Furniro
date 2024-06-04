@@ -4,13 +4,7 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 
 const CartTable = () => {
-  const { cart, removeFromCart } = useCart();
-
-  const calculateTotal = () => {
-    return cart
-      .reduce((acc, item) => acc + item.price * item.quantity, 0)
-      .toFixed(2);
-  };
+  const { cart, removeFromCart, getTotalPrice } = useCart();
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row lg:items-start lg:px-[50px]">
@@ -90,11 +84,11 @@ const CartTable = () => {
         </h3>
         <div className="mb-4 flex w-full justify-normal gap-20 font-poppins text-base font-medium sm:justify-between">
           <span className="text-color-7">Subtotal:</span>
-          <span className="text-color-6">${calculateTotal()}</span>
+          <span className="text-color-6">${getTotalPrice().toFixed(2)}</span>
         </div>
         <div className="mb-8 flex w-full justify-normal gap-20 font-poppins text-base font-medium sm:justify-between">
           <span className="text-color-7">Total:</span>
-          <span className="text-color-4">${calculateTotal()}</span>
+          <span className="text-color-4">${getTotalPrice().toFixed(2)}</span>
         </div>
         <Link to="/billing">
           <Button

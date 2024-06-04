@@ -8,7 +8,11 @@ import { CartProps } from "../types/cartTypes";
 const BillingPage = ({ openCart, toggleCart }: CartProps) => {
   return (
     <Section>
-      <ExtendedHeader openCart={openCart} toggleCart={toggleCart} />
+      <ExtendedHeader
+        openCart={openCart}
+        toggleCart={toggleCart}
+        customTitle="Billing"
+      />
       <Billing />
       <FeatureShowcase />
       <Footer />

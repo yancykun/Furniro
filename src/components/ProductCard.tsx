@@ -48,7 +48,7 @@ const ProductCard = ({
       </div>
       {handleShowMore && (
         <div className="mt-14 flex justify-center">
-          <Button white border onClick={handleShowMore}>
+          <Button className="uppercase" white border onClick={handleShowMore}>
             {showMore ? "show more" : "show less"}
           </Button>
         </div>

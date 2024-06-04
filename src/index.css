@@ -14,7 +14,7 @@
 
 @layer components {
   .button {
-    @apply font-poppins text-base font-bold uppercase tracking-wider;
+    @apply font-poppins text-base font-bold tracking-wider;
   }
 
   .h1 {
