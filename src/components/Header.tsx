@@ -86,6 +86,7 @@ const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
               <CartSidebar
                 toggleCartSidebar={toggleCartSidebar}
                 openCart={openCart}
+                handleClick={handleClick}
               />
             </div>
           </>
