@@ -16,8 +16,16 @@ const App = () => {
   const [openCart, setOpenCart] = useState(false);
 
   const toggleCartSidebar = () => {
-    const newState = !openCart;
-    setOpenCart(newState);
+    if (openCart) {
+      setOpenCart(false);
+    } else {
+      setOpenCart(true);
+    }
+  };
+
+  const handleClick = () => {
+    if (!openCart) return;
+    setOpenCart(false);
   };
 
   return (
@@ -100,7 +108,11 @@ const App = () => {
       </Routes>
       {openCart && (
         <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
-          <CartSidebar toggleCartSidebar={toggleCartSidebar} />
+          <CartSidebar
+            toggleCartSidebar={toggleCartSidebar}
+            openCart={openCart}
+            handleClick={handleClick}
+          />
         </div>
       )}
     </CartProvider>

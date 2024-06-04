@@ -3,12 +3,13 @@ import { cartClose, deleteItem } from "../assets";
 import { useCart } from "../hooks/useCart";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { CartSidebarProps } from "../types/cartSidebarProps";
 
-type CartSidebarProps = {
-  toggleCartSidebar: () => void;
-};
+interface CartSidebar extends CartSidebarProps {
+  handleClick: () => void;
+}
 
-const CartSidebar = ({ toggleCartSidebar }: CartSidebarProps) => {
+const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
   const { cart, removeFromCart, getTotalPrice } = useCart();
 
   return (
@@ -77,6 +78,7 @@ const CartSidebar = ({ toggleCartSidebar }: CartSidebarProps) => {
       <div className="flex gap-4 px-4 py-4">
         <Link to="/cart">
           <Button
+            onClick={handleClick}
             white
             border
             className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"
@@ -87,6 +89,7 @@ const CartSidebar = ({ toggleCartSidebar }: CartSidebarProps) => {
 
         <Link to="/billing">
           <Button
+            onClick={handleClick}
             white
             border
             className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"

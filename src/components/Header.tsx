@@ -83,7 +83,10 @@ const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
           <>
             <div className="fixed inset-0 z-40 bg-color-7/40"></div>
             <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
-              <CartSidebar toggleCartSidebar={toggleCartSidebar} />
+              <CartSidebar
+                toggleCartSidebar={toggleCartSidebar}
+                openCart={openCart}
+              />
             </div>
           </>
         )}
