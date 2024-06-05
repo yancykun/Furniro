@@ -1,4 +1,5 @@
 import { FieldError, UseFormRegister } from "react-hook-form";
+import { ZodType, z } from "zod";
 
 export type CartSidebarProps = {
   toggleCartSidebar: () => void;
@@ -22,9 +23,11 @@ export type Product = {
 export type FormData = {
   fullName: string;
   email: string;
-  subject: string;
+  subject?: string;
   message: string;
 };
+
+export type ValidFieldNames = "fullName" | "email" | "subject" | "message";
 
 export type FormFieldProps = {
   type: string;
@@ -36,4 +39,9 @@ export type FormFieldProps = {
   label: string;
 };
 
-export type ValidFieldNames = "fullName" | "email" | "subject" | "message";
+export const UserSchema: ZodType<FormData> = z.object({
+  fullName: z.string().min(1, "Full name is required."),
+  email: z.string().email(),
+  subject: z.string().optional(),
+  message: z.string(),
+});

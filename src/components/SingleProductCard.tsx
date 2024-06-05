@@ -65,17 +65,17 @@ const SingleProductCard = () => {
             {product.description}
           </p>
           <div className="flex items-center gap-5 max-sm:flex-col">
-            <div className="flex h-[55px] w-[120px] items-center justify-center gap-6 rounded-lg border border-color-6 hover:border-2 hover:border-color-7">
+            <div className="flex h-[55px] w-[120px] items-center justify-center gap-6 rounded-lg border border-color-6 hover:border-2 hover:border-color-4">
               <button
                 onClick={decrement}
-                className="font-poppins text-color-7 hover:font-bold"
+                className="font-poppins text-color-7 hover:font-bold hover:text-color-4"
               >
                 -
               </button>
               <p className="font-poppins font-medium text-color-7">{count}</p>
               <button
                 onClick={increment}
-                className="font-poppins text-color-7 hover:font-bold"
+                className="font-poppins text-color-7 hover:font-bold hover:text-color-4"
               >
                 +
               </button>
@@ -83,7 +83,7 @@ const SingleProductCard = () => {
             <Button
               white
               border
-              className="h-[55px] rounded-lg border border-color-7 font-medium text-color-7"
+              className="h-[55px] rounded-lg border border-color-7 font-medium text-color-7 hover:border-color-4"
               onClick={handleAddToCart}
             >
               Add to cart
