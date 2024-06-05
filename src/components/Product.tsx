@@ -5,7 +5,7 @@ import { products } from "../constants";
 
 const Product = () => {
   // State to manage the number of visible products
-  const [visibleProducts, setVisibleProducts] = useState(8);
+  const [visibleProducts, setVisibleProducts] = useState(6);
 
   // State to manage showmore button and functionality
   const [showMore, setShowMore] = useState(true);
@@ -14,11 +14,11 @@ const Product = () => {
   const handleShowMore = () => {
     // if products are already visible, reset to default
     if (visibleProducts >= products.length) {
-      setVisibleProducts(8);
+      setVisibleProducts(6);
       setShowMore(true);
     } else {
-      setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 8);
-      if (visibleProducts + 8 >= products.length) {
+      setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 6);
+      if (visibleProducts + 6 >= products.length) {
         setShowMore(false);
       }
     }

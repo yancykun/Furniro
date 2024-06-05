@@ -2,7 +2,7 @@ import BreadcrumbHeader from "../components/BreadcrumbHeader";
 import CategoryShowcase from "../components/CategoryShowcase";
 import FeatureShowcase from "../components/FeatureShowcase";
 import Footer from "../components/Footer";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
 
 const CategoryPage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   return (

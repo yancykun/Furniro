@@ -5,11 +5,14 @@ import { navigation } from "../constants";
 import { useState } from "react";
 import MenuSvg from "../assets/svg/MenuSvg";
 import CartSidebar from "./CartSidebar";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
+import { useCart } from "../hooks/useCart";
 
 const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   const location = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
+  const { getItemCount } = useCart();
+  const itemCount = getItemCount();
 
   const toggleNavigation = () => {
     if (openNavigation) {
@@ -66,13 +69,20 @@ const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
         </nav>
 
         <div className="flex items-center justify-center gap-4">
-          <img
-            width={25}
-            onClick={toggleCartSidebar}
-            className="cursor-pointer"
-            src={cart}
-            alt="Cart"
-          />
+          <div className="relative">
+            <img
+              width={25}
+              onClick={toggleCartSidebar}
+              className="cursor-pointer"
+              src={cart}
+              alt="Cart"
+            />
+            {itemCount > 0 && (
+              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white">
+                {itemCount}
+              </span>
+            )}
+          </div>
 
           <button className="flex lg:hidden" onClick={toggleNavigation}>
             <MenuSvg openNavigation={openNavigation} />

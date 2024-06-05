@@ -3,7 +3,7 @@ import Header from "./Header";
 import ArrowIcon from "../assets/svg/ArrowIcon";
 import { useLocation } from "react-router-dom";
 import { categories, navigation, products } from "../constants";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
 
 const BreadcrumbHeader = ({
   toggleCartSidebar,

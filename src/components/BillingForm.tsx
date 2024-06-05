@@ -2,9 +2,10 @@ import { useCart } from "../hooks/useCart";
 import LabeledInput from "./LabeledInput";
 import Button from "./Button";
 import { useState } from "react";
+import Radio from "./Radio";
 
 const BillingForm = () => {
-  const [paymentMethod, setPaymentMethod] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
 
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
@@ -13,7 +14,7 @@ const BillingForm = () => {
   const { cart, getTotalPrice } = useCart();
 
   return (
-    <div className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start">
+    <form className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start">
       <div className="grid w-full justify-center md:w-[600px]">
         <h3 className="mb-[2.35rem] font-poppins text-2xl font-semibold md:text-3xl lg:text-4xl">
           Billing details
@@ -123,23 +124,21 @@ const BillingForm = () => {
               </p>
             </>
           )}
-          <div className="flex w-full flex-col items-start max-sm:items-center">
+          <div className="js flex w-full flex-col items-start max-sm:items-center">
             <div className="mb-2 mt-4">
-              <LabeledInput
+              <Radio
+                label="Direct Bank Transfer"
                 value="bankTransfer"
                 checked={paymentMethod === "bankTransfer"}
-                onChange={handlePaymentMethod}
-                label="Direct Bank Transfer"
-                type="radio"
+                handlePaymentMethod={handlePaymentMethod}
               />
             </div>
             <div className="mb-8">
-              <LabeledInput
+              <Radio
+                label="Cash On Delivery"
                 value="cashOnDelivery"
                 checked={paymentMethod === "cashOnDelivery"}
-                onChange={handlePaymentMethod}
-                label="Cash on delivery"
-                type="radio"
+                handlePaymentMethod={handlePaymentMethod}
               />
             </div>
           </div>
@@ -158,7 +157,7 @@ const BillingForm = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

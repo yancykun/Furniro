@@ -3,7 +3,7 @@ import ExtendedHeader from "../components/ExtendedHeader";
 import FeatureShowcase from "../components/FeatureShowcase";
 import Footer from "../components/Footer";
 import Section from "../components/Section";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
 
 const BillingPage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   return (

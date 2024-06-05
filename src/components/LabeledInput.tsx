@@ -18,23 +18,16 @@ const LabeledInput = ({
   onChange,
 }: LabeledInputProps) => {
   return (
-    <div
-      className={`flex ${type === "radio" ? "flex-row-reverse gap-2" : "flex-col"}`}
-    >
-      {label && (
-        <label
-          className={`${type === "text" ? "mb-4" : "mb-0"} font-poppins font-medium`}
-        >
-          {label}
-        </label>
-      )}
+    <div className="flex flex-col">
+      <label className="mb-4 font-poppins font-medium">{label}</label>
+
       <input
         checked={checked}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
         type={type}
-        className={`rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none sm:px-8 ${className} ${type !== "radio" ? "mb-8" : ""}`}
+        className={`mb-8 rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none sm:px-8 ${className} `}
       />
     </div>
   );

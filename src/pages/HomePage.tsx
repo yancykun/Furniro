@@ -4,7 +4,7 @@ import Categories from "../components/Categories";
 import Product from "../components/Product";
 import Inspiration from "../components/Inspiration";
 import Footer from "../components/Footer";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
 
 const HomePage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   return (

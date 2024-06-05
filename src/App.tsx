@@ -11,6 +11,7 @@ import BillingPage from "./pages/BillingPage";
 import { useState } from "react";
 import Header from "./components/Header";
 import CartSidebar from "./components/CartSidebar";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const [openCart, setOpenCart] = useState(false);
@@ -32,6 +33,7 @@ const App = () => {
     <CartProvider>
       {openCart && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
       <Header openCart={openCart} toggleCartSidebar={toggleCartSidebar} />
+      <ScrollToTop />
       <Routes>
         <Route
           path="/"

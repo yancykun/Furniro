@@ -3,7 +3,7 @@ import { cartClose, deleteItem } from "../assets";
 import { useCart } from "../hooks/useCart";
 import Button from "./Button";
 import { Link } from "react-router-dom";
-import { CartSidebarProps } from "../types/cartSidebarProps";
+import { CartSidebarProps } from "../types/types";
 
 interface CartSidebar extends CartSidebarProps {
   handleClick: () => void;
