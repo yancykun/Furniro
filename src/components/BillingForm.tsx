@@ -1,11 +1,54 @@
 import { useCart } from "../hooks/useCart";
-import LabeledInput from "./LabeledInput";
+import FormField from "./FormField";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Radio from "./Radio";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { BillingSchema, BillingFormData } from "../types/types";
 
 const BillingForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    setError,
+    reset,
+  } = useForm<BillingFormData>({
+    resolver: zodResolver(BillingSchema),
+  });
+
+  const clearSuccessMessage = () => {
+    setSuccessMessage("");
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [successMessage]);
+
+  const onSubmit = async (data: BillingFormData) => {
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log("Success", data);
+      setSuccessMessage("Your payment has been sent successfully!");
+
+      reset();
+    } catch (error) {
+      setError("root", {
+        type: "manual",
+        message: "Something went wrong. Please try again later.",
+      });
+      setSuccessMessage("");
+    }
+  };
 
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
@@ -14,56 +57,94 @@ const BillingForm = () => {
   const { cart, getTotalPrice } = useCart();
 
   return (
-    <form className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start">
-      <div className="grid w-full justify-center md:w-[600px]">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start"
+    >
+      <div
+        onInput={clearSuccessMessage}
+        className="grid w-full justify-center md:w-[600px]"
+      >
         <h3 className="mb-[2.35rem] font-poppins text-2xl font-semibold md:text-3xl lg:text-4xl">
           Billing details
         </h3>
+
         <div className="flex gap-2 sm:gap-6">
-          <LabeledInput
+          <FormField
             className="h-[60px] w-[160px] sm:h-[75px] sm:w-[211px]"
             label="First Name"
+            name="firstName"
             placeholder="Yancy Garret"
+            register={register}
+            error={errors.firstName}
           />
-          <LabeledInput
+          <FormField
             className="h-[60px] w-[160px] sm:h-[75px] sm:w-[211px]"
             label="Last Name"
+            name="lastName"
             placeholder="Saac"
+            register={register}
+            error={errors.lastName}
           />
         </div>
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Company Name (Optional)"
+          name="company"
+          register={register}
+          error={errors.company}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Country/ Region"
+          name="country"
           placeholder="Philippines"
+          register={register}
+          error={errors.country}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Street address"
+          name="streetAddress"
+          register={register}
+          error={errors.streetAddress}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Town/ City"
+          name="townCity"
+          register={register}
+          error={errors.townCity}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Province"
+          name="province"
           placeholder="North Cotabato"
+          register={register}
+          error={errors.province}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Phone"
+          name="phone"
+          type="text"
+          register={register}
+          error={errors.phone}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Email address"
+          name="email"
+          register={register}
+          error={errors.email}
         />
-        <LabeledInput
+        <FormField
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
-          placeholder="Additional Information"
+          label="Additional Information"
+          name="additionalInfo"
+          register={register}
+          error={errors.additionalInfo}
         />
       </div>
 
@@ -142,18 +223,29 @@ const BillingForm = () => {
               />
             </div>
           </div>
-          <p className="mb-6 max-w-[528px] text-justify font-poppins text-base text-color-7">
+          <p className="mb-6 max-w-[528px] text-justify font-poppins text-base text-color-7 lg:mb-8">
             Your personal data will be used to support your experience
             throughout this website, to manage access to your account, and for
             other purposes described in our{" "}
             <span className="font-semibold">privacy policy.</span>
           </p>
+          {errors.root && (
+            <div className="mb-4 font-poppins font-semibold text-red-800">
+              {errors.root.message}
+            </div>
+          )}
+          {successMessage && (
+            <div className="mb-4 font-poppins font-semibold text-green-800">
+              {successMessage}
+            </div>
+          )}
           <Button
-            border
+            type="submit"
+            disabled={isSubmitting}
             white
-            className="h-[64px] w-[300px] rounded-[15px] border-color-7 text-xl font-medium text-color-7"
+            className="rounded-[15px]text-xl h-[64px] w-[300px] font-medium"
           >
-            Place order
+            {isSubmitting ? "Placing order" : "Place order"}
           </Button>
         </div>
       </div>

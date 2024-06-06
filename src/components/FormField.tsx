@@ -1,18 +1,20 @@
+import { FieldValues } from "react-hook-form";
 import { FormFieldProps } from "../types/types";
 
-const FormField = ({
-  type,
+const FormField = <T extends FieldValues>({
+  type = "text",
   placeholder,
   name,
   register,
   error,
   className,
   label,
-}: FormFieldProps) => {
+}: FormFieldProps<T>) => {
   return (
     <div className="mb-8 flex flex-col">
-      <label className="mb-3 font-poppins font-medium">{label}</label>
-
+      {label && (
+        <label className="mb-3 font-poppins font-medium">{label}</label>
+      )}
       <input
         type={type}
         placeholder={placeholder}

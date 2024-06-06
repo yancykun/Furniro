@@ -1,23 +1,38 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import Button from "./Button";
 import FormField from "./FormField";
-import { FormData, UserSchema } from "../types/types";
+import { ContactFormData, ContactSchema } from "../types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const ContactForm = () => {
   const [successMessage, setSuccessMessage] = useState("");
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
     reset,
-  } = useForm<FormData>({
-    resolver: zodResolver(UserSchema),
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(ContactSchema),
   });
 
-  const onSubmit = async (data: FormData) => {
+  const clearSuccessMessage = () => {
+    setSuccessMessage("");
+  };
+
+  useEffect(() => {
+    if (successMessage) {
+      const timer = setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000); // Message disappears after 5 seconds
+
+      return () => clearTimeout(timer); // Clear timeout if the component unmounts or successMessage changes
+    }
+  }, [successMessage]);
+
+  const onSubmit = async (data: ContactFormData) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       console.log("Success", data);
@@ -37,11 +52,10 @@ const ContactForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col items-center xl:items-start"
     >
-      <div className="flex flex-col">
+      <div className="flex flex-col" onInput={clearSuccessMessage}>
         <FormField
           name="fullName"
           label="Your name"
-          type="text"
           placeholder="Yancy Garret"
           className="h-[75px] w-full sm:w-[528px]"
           register={register}
@@ -59,7 +73,6 @@ const ContactForm = () => {
         <FormField
           name="subject"
           label="Subject"
-          type="text"
           placeholder="This is an optional"
           className="h-[75px] w-full sm:w-[528px]"
           register={register}
@@ -88,9 +101,7 @@ const ContactForm = () => {
       <Button
         disabled={isSubmitting}
         type="submit"
-        white
-        border
-        className="mt-3 rounded-md border bg-color-4 font-medium capitalize text-color-2"
+        className="mt-3 rounded-md border capitalize"
       >
         {isSubmitting ? "Submitting" : "Submit"}
       </Button>

@@ -80,8 +80,7 @@ const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
           <Button
             onClick={handleClick}
             white
-            border
-            className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"
+            className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >
             Cart
           </Button>
@@ -91,8 +90,7 @@ const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
           <Button
             onClick={handleClick}
             white
-            border
-            className="h-[30px] w-[87px] rounded-[50px] border-color-7 font-poppins text-xs font-normal capitalize text-color-7"
+            className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >
             Checkout
           </Button>
