@@ -93,7 +93,7 @@ const CartTable = () => {
         <Link to="/billing">
           <Button
             white
-            className="rounded-xl border-color-7 bg-color-2 text-[1.25rem] font-normal capitalize text-color-7 hover:border-color-4"
+            className="rounded-xl text-[1.25rem] font-normal capitalize"
           >
             Check Out
           </Button>
