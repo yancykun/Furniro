@@ -4,7 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodSchema } from "zod";
 import useFormStore from "../store/useFormStore";
 
-type UseFormHandlerReturn<T extends FieldValues> = UseFormReturn<T> & {
+type UseFormHandlerReturn<T extends FieldValues> = Omit<
+  UseFormReturn<T>,
+  "formState"
+> & {
+  formState: {
+    errors: UseFormReturn<T>["formState"]["errors"];
+    isSubmitting: UseFormReturn<T>["formState"]["isSubmitting"];
+  };
   successMessage: string;
   onSubmit: (data: T, onSuccess: (data: T) => void) => Promise<void>;
 };
@@ -21,6 +28,16 @@ const useFormHandler = <T extends FieldValues>(
     formState: { errors, isSubmitting },
     setError,
     reset,
+    watch,
+    getValues,
+    getFieldState,
+    clearErrors,
+    trigger,
+    control,
+    setFocus,
+    setValue,
+    resetField,
+    unregister,
   } = useForm<T>({
     resolver: zodResolver(schema),
   });
@@ -56,6 +73,18 @@ const useFormHandler = <T extends FieldValues>(
       errors,
       isSubmitting,
     },
+    setError,
+    reset,
+    watch,
+    getValues,
+    getFieldState,
+    clearErrors,
+    trigger,
+    control,
+    setFocus,
+    setValue,
+    resetField,
+    unregister,
     successMessage,
     onSubmit,
   };
