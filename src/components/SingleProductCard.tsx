@@ -82,7 +82,6 @@ const SingleProductCard = () => {
             </div>
             <Button
               white
-              border
               className="h-[55px] rounded-lg border border-color-7 font-medium text-color-7 hover:border-color-4"
               onClick={handleAddToCart}
             >
