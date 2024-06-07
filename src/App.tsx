@@ -5,7 +5,6 @@ import CategoriesPage from "./pages/CategoriesPage";
 import CategoryPage from "./pages/CategoryPage";
 import ContactPage from "./pages/ContactPage";
 import SingleProductPage from "./pages/SingleProductPage";
-import { CartProvider } from "./context/CartContext";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
 import { useState } from "react";
@@ -30,7 +29,7 @@ const App = () => {
   };
 
   return (
-    <CartProvider>
+    <>
       {openCart && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
       <Header openCart={openCart} toggleCartSidebar={toggleCartSidebar} />
       <ScrollToTop />
@@ -117,7 +116,7 @@ const App = () => {
           />
         </div>
       )}
-    </CartProvider>
+    </>
   );
 };
 

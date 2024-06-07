@@ -1,4 +1,3 @@
-import { useCart } from "../hooks/useCart";
 import FormField from "./FormField";
 import Button from "./Button";
 import { useEffect, useState } from "react";
@@ -6,6 +5,7 @@ import Radio from "./Radio";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BillingSchema, BillingFormData } from "../types/types";
+import { useCartStore } from "../store/useCartStore";
 
 const BillingForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
@@ -54,7 +54,8 @@ const BillingForm = () => {
     setPaymentMethod(event.target.value);
   };
 
-  const { cart, getTotalPrice } = useCart();
+  const cart = useCartStore((state) => state.cart);
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
   return (
     <form

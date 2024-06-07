@@ -1,10 +1,12 @@
 import { trashcan } from "../assets";
-import { useCart } from "../hooks/useCart";
 import Button from "./Button";
 import { Link } from "react-router-dom";
+import { useCartStore } from "../store/useCartStore";
 
 const CartTable = () => {
-  const { cart, removeFromCart, getTotalPrice } = useCart();
+  const cart = useCartStore((state) => state.cart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
   return (
     <div className="flex flex-col items-center justify-center gap-8 sm:px-8 lg:flex-row lg:items-start lg:px-[50px]">

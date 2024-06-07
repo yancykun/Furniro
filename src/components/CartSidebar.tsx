@@ -1,16 +1,18 @@
 import React from "react";
 import { cartClose, deleteItem } from "../assets";
-import { useCart } from "../hooks/useCart";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { CartSidebarProps } from "../types/types";
+import { useCartStore } from "../store/useCartStore";
 
 interface CartSidebar extends CartSidebarProps {
   handleClick: () => void;
 }
 
 const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
-  const { cart, removeFromCart, getTotalPrice } = useCart();
+  const cart = useCartStore((state) => state.cart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
   return (
     <div className="relative flex h-full flex-col bg-color-1 shadow-lg">

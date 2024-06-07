@@ -6,13 +6,13 @@ import { useState } from "react";
 import MenuSvg from "../assets/svg/MenuSvg";
 import CartSidebar from "./CartSidebar";
 import { CartSidebarProps } from "../types/types";
-import { useCart } from "../hooks/useCart";
+import { useCartStore } from "../store/useCartStore";
 
 const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
   const location = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
-  const { getItemCount } = useCart();
-  const itemCount = getItemCount();
+
+  const itemCount = useCartStore((state) => state.itemCount);
 
   const toggleNavigation = () => {
     if (openNavigation) {

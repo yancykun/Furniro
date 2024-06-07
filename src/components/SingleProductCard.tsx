@@ -3,11 +3,12 @@ import { products } from "../constants";
 import StarRating from "./StarRating";
 import Button from "./Button";
 import { useState } from "react";
-import { useCart } from "../hooks/useCart";
+import { useCartStore } from "../store/useCartStore";
 
 const SingleProductCard = () => {
   const [count, setCount] = useState<number>(1);
-  const { addToCart } = useCart();
+
+  const addToCart = useCartStore((state) => state.addToCart);
 
   const increment = () => {
     setCount((count) => count + 1);
