@@ -1,64 +1,38 @@
 import FormField from "./FormField";
 import Button from "./Button";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Radio from "./Radio";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import useFormHandler from "../hooks/useFormHandler";
 import { BillingSchema, BillingFormData } from "../types/types";
 import { useCartStore } from "../store/useCartStore";
+import useFormStore from "../store/useFormStore";
 
 const BillingForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
-  const [successMessage, setSuccessMessage] = useState("");
-  const cart = useCartStore((state) => state.cart);
-  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
-
+  const clearSuccessMessage = useFormStore(
+    (state) => state.clearSuccessMessage,
+  );
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    setError,
-    reset,
-  } = useForm<BillingFormData>({
-    resolver: zodResolver(BillingSchema),
-  });
+    successMessage,
+    onSubmit,
+  } = useFormHandler(BillingSchema);
 
-  const clearSuccessMessage = () => {
-    setSuccessMessage("");
+  const cart = useCartStore((state) => state.cart);
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
+
+  const handleBillingSubmit = (data: BillingFormData) => {
+    console.log("Billing Success", data);
   };
 
-  useEffect(() => {
-    if (successMessage) {
-      const timer = setTimeout(() => {
-        setSuccessMessage("");
-      }, 5000);
-      return () => clearTimeout(timer);
-    }
-  }, [successMessage]);
-
-  const onSubmit = async (data: BillingFormData) => {
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Success", data);
-      setSuccessMessage("Your payment has been sent successfully!");
-
-      reset();
-    } catch (error) {
-      setError("root", {
-        type: "manual",
-        message: "Something went wrong. Please try again later.",
-      });
-      setSuccessMessage("");
-    }
-  };
-
-  const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) =>
     setPaymentMethod(event.target.value);
-  };
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit((data) => onSubmit(data, handleBillingSubmit))}
       className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start"
     >
       <div
