@@ -10,6 +10,8 @@ import { useCartStore } from "../store/useCartStore";
 const BillingForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
   const [successMessage, setSuccessMessage] = useState("");
+  const cart = useCartStore((state) => state.cart);
+  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
   const {
     register,
@@ -53,9 +55,6 @@ const BillingForm = () => {
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
   };
-
-  const cart = useCartStore((state) => state.cart);
-  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
   return (
     <form

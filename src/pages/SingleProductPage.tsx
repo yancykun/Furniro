@@ -1,18 +1,11 @@
 import BreadcrumbHeader from "../components/BreadcrumbHeader";
 import Footer from "../components/Footer";
 import SingleProductCard from "../components/SingleProductCard";
-import { CartSidebarProps } from "../types/types";
 
-const SingleProductPage = ({
-  openCart,
-  toggleCartSidebar,
-}: CartSidebarProps) => {
+const SingleProductPage = () => {
   return (
     <div>
-      <BreadcrumbHeader
-        openCart={openCart}
-        toggleCartSidebar={toggleCartSidebar}
-      />
+      <BreadcrumbHeader />
       <SingleProductCard />
       <Footer />
     </div>

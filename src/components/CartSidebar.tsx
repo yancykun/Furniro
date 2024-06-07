@@ -4,15 +4,22 @@ import Button from "./Button";
 import { Link } from "react-router-dom";
 import { CartSidebarProps } from "../types/types";
 import { useCartStore } from "../store/useCartStore";
+import { useCartSidebarStore } from "../store/useCartSidebarStore";
 
 interface CartSidebar extends CartSidebarProps {
   handleClick: () => void;
 }
 
-const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
+const CartSidebar = () => {
   const cart = useCartStore((state) => state.cart);
   const removeFromCart = useCartStore((state) => state.removeFromCart);
   const getTotalPrice = useCartStore((state) => state.getTotalPrice);
+  const toggleCartSidebar = useCartSidebarStore(
+    (state) => state.toggleCartSidebar,
+  );
+  const closeCartSidebar = useCartSidebarStore(
+    (state) => state.closeCartSidebar,
+  );
 
   return (
     <div className="relative flex h-full flex-col bg-color-1 shadow-lg">
@@ -80,7 +87,7 @@ const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
       <div className="flex gap-4 px-4 py-4">
         <Link to="/cart">
           <Button
-            onClick={handleClick}
+            onClick={closeCartSidebar}
             white
             className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >
@@ -90,7 +97,7 @@ const CartSidebar = ({ toggleCartSidebar, handleClick }: CartSidebar) => {
 
         <Link to="/billing">
           <Button
-            onClick={handleClick}
+            onClick={closeCartSidebar}
             white
             className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >

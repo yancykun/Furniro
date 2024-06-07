@@ -4,12 +4,11 @@ import Categories from "../components/Categories";
 import Product from "../components/Product";
 import Inspiration from "../components/Inspiration";
 import Footer from "../components/Footer";
-import { CartSidebarProps } from "../types/types";
 
-const HomePage = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
+const HomePage = () => {
   return (
     <div className="overflow-hidden pt-[3.5rem] md:pt-[5rem]">
-      <Header toggleCartSidebar={toggleCartSidebar} openCart={openCart} />
+      <Header />
       <Hero />
       <Categories />
       <Product />

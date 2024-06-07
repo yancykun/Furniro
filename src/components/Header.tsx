@@ -5,13 +5,16 @@ import { navigation } from "../constants";
 import { useState } from "react";
 import MenuSvg from "../assets/svg/MenuSvg";
 import CartSidebar from "./CartSidebar";
-import { CartSidebarProps } from "../types/types";
 import { useCartStore } from "../store/useCartStore";
+import { useCartSidebarStore } from "../store/useCartSidebarStore";
 
-const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
+const Header = () => {
   const location = useLocation();
   const [openNavigation, setOpenNavigation] = useState(false);
-
+  const openCart = useCartSidebarStore((state) => state.openCart);
+  const toggleCartSidebar = useCartSidebarStore(
+    (state) => state.toggleCartSidebar,
+  );
   const itemCount = useCartStore((state) => state.itemCount);
 
   const toggleNavigation = () => {
@@ -93,11 +96,7 @@ const Header = ({ toggleCartSidebar, openCart }: CartSidebarProps) => {
           <>
             <div className="fixed inset-0 z-40 bg-color-7/40"></div>
             <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
-              <CartSidebar
-                toggleCartSidebar={toggleCartSidebar}
-                openCart={openCart}
-                handleClick={handleClick}
-              />
+              <CartSidebar />
             </div>
           </>
         )}
