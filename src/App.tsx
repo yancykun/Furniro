@@ -7,9 +7,9 @@ import ContactPage from "./pages/ContactPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
-import Header from "./components/Header";
-import CartSidebar from "./components/CartSidebar";
-import ScrollToTop from "./components/ScrollToTop";
+import Header from "./components/Section/Header/Header";
+import CartSidebar from "./components/Features/Cart/CartSidebar";
+import ScrollToTop from "./components/Features/ScrollToTop/ScrollToTop";
 import { useCartSidebarStore } from "./store/useCartSidebarStore";
 const App = () => {
   const openCart = useCartSidebarStore((state) => state.openCart);

@@ -1,9 +1,9 @@
-import Header from "../components/Header";
-import Hero from "../components/Hero";
-import Categories from "../components/Categories";
-import Product from "../components/Product";
-import Inspiration from "../components/Inspiration";
-import Footer from "../components/Footer";
+import Header from "../components/Section/Header/Header";
+import Hero from "../components/Section/Hero/Hero";
+import Categories from "../components/Section/Categories/Categories";
+import Product from "../components/Section/Product/Product";
+import Inspiration from "../components/Section/Inspiration/Inspiration";
+import Footer from "../components/Section/Footer/Footer";
 
 const HomePage = () => {
   return (

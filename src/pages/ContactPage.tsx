@@ -1,7 +1,7 @@
-import ExtendedHeader from "../components/ExtendedHeader";
-import Contact from "../components/Contact";
-import FeatureShowcase from "../components/FeatureShowcase";
-import Footer from "../components/Footer";
+import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
+import Contact from "../components/Features/Contact/Contact";
+import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import Footer from "../components/Section/Footer/Footer";
 
 const ContactPage = () => {
   return (

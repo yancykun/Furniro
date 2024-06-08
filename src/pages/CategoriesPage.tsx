@@ -1,7 +1,7 @@
-import ExtendedHeader from "../components/ExtendedHeader";
-import Footer from "../components/Footer";
-import FeatureShowcase from "../components/FeatureShowcase";
-import CategoryShowcase from "../components/CategoryShowcase";
+import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
+import Footer from "../components/Section/Footer/Footer";
+import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import CategoryShowcase from "../components/Features/Categories/CategoryShowcase";
 
 const CategoriesPage = () => {
   return (

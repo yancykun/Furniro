@@ -1,8 +1,8 @@
-import Billing from "../components/Billing";
-import ExtendedHeader from "../components/ExtendedHeader";
-import FeatureShowcase from "../components/FeatureShowcase";
-import Footer from "../components/Footer";
-import Section from "../components/Section";
+import Billing from "../components/Features/Billing/Billing";
+import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
+import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import Footer from "../components/Section/Footer/Footer";
+import Section from "../components/Layout/Section";
 
 const BillingPage = () => {
   return (
