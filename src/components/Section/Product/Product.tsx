@@ -1,28 +1,12 @@
 import Section from "../../Layout/Section";
 import ProductCard from "../../Features/Product/ProductCard";
-import { useState } from "react";
-import { products } from "../../../constants/index";
+import { useProductStore } from "../../../store/useProductStore";
 
 const Product = () => {
-  // State to manage the number of visible products
-  const [visibleProducts, setVisibleProducts] = useState(6);
-
-  // State to manage showmore button and functionality
-  const [showMore, setShowMore] = useState(true);
-
-  // Function to handle showing more or less producs
-  const handleShowMore = () => {
-    // if products are already visible, reset to default
-    if (visibleProducts >= products.length) {
-      setVisibleProducts(6);
-      setShowMore(true);
-    } else {
-      setVisibleProducts((prevVisibleProducts) => prevVisibleProducts + 6);
-      if (visibleProducts + 6 >= products.length) {
-        setShowMore(false);
-      }
-    }
-  };
+  const products = useProductStore((state) => state.products);
+  const showMore = useProductStore((state) => state.showMore);
+  const visibleProducts = useProductStore((state) => state.visibleProducts);
+  const handleShowMore = useProductStore((state) => state.handleShowMore);
 
   return (
     <Section id="shop">
