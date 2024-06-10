@@ -3,7 +3,7 @@ import Section from "../../Layout/Section";
 const FeatureShowcase = () => {
   return (
     <Section customPaddings="pt-[40px] lg:pt-[50px] pb-0">
-      <div className="grid h-auto w-full grid-cols-1 items-center gap-10 bg-color-2 px-0 py-[2rem] md:grid-cols-2 md:gap-6 md:px-[53px] md:py-[100px] lg:grid-cols-3 xl:grid-cols-4">
+      <div className="grid h-auto w-full grid-cols-1 items-center gap-5 bg-color-2 px-0 py-[2rem] md:grid-cols-2 md:px-[53px] md:py-[100px] lg:grid-cols-4">
         {features.map((feature) => (
           <div
             key={feature.id}
