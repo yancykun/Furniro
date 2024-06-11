@@ -1,37 +1,25 @@
 import { Link, useLocation } from "react-router-dom";
-import { disablePageScroll, enablePageScroll } from "scroll-lock";
 import { cart, logo } from "../../../assets";
 import { navigation } from "../../../constants/index";
-import { useState } from "react";
 import MenuSvg from "../../../assets/svg/MenuSvg";
 import CartSidebar from "../../Features/Cart/CartSidebar";
 import { useCartStore } from "../../../store/useCartStore";
 import { useCartSidebarStore } from "../../../store/useCartSidebarStore";
+import { useNavigationStore } from "../../../store/useNavigationStore";
 
 const Header = () => {
   const location = useLocation();
-  const [openNavigation, setOpenNavigation] = useState(false);
+  const openNavigation = useNavigationStore((state) => state.openNavigation);
   const openCart = useCartSidebarStore((state) => state.openCart);
+  const closeNavigation = useNavigationStore((state) => state.closeNavigation);
+  const itemCount = useCartStore((state) => state.itemCount);
+
+  const toggleNavigation = useNavigationStore(
+    (state) => state.toggleNavigation,
+  );
   const toggleCartSidebar = useCartSidebarStore(
     (state) => state.toggleCartSidebar,
   );
-  const itemCount = useCartStore((state) => state.itemCount);
-
-  const toggleNavigation = () => {
-    if (openNavigation) {
-      setOpenNavigation(false);
-      enablePageScroll();
-    } else {
-      setOpenNavigation(true);
-      disablePageScroll();
-    }
-  };
-
-  const handleClick = () => {
-    if (!openNavigation) return;
-    enablePageScroll();
-    setOpenNavigation(false);
-  };
 
   return (
     <header
@@ -63,7 +51,7 @@ const Header = () => {
                 className={`relative block font-poppins text-lg font-semibold text-color-7 transition-colors hover:text-color-4 ${
                   item.url === location.pathname ? "z-2 lg:text-color-4" : ""
                 }`}
-                onClick={handleClick}
+                onClick={closeNavigation}
               >
                 {item.title}
               </Link>
