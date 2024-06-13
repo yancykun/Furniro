@@ -89,7 +89,7 @@ const CartSidebar = () => {
           <Button
             onClick={closeCartSidebar}
             white
-            className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
+            className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >
             Cart
           </Button>
@@ -99,7 +99,7 @@ const CartSidebar = () => {
           <Button
             onClick={closeCartSidebar}
             white
-            className="h-[30px] w-[87px] rounded-[50px] font-poppins text-xs font-normal capitalize"
+            className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-normal capitalize"
           >
             Checkout
           </Button>

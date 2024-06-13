@@ -11,7 +11,7 @@ const FormField = <T extends FieldValues>({
   label,
 }: FormFieldProps<T>) => {
   return (
-    <div className="mb-8 flex flex-col">
+    <div className="mb-4 flex flex-col">
       {label && (
         <label className="mb-3 font-poppins font-medium">{label}</label>
       )}
@@ -19,7 +19,7 @@ const FormField = <T extends FieldValues>({
         type={type}
         placeholder={placeholder}
         {...register(name)}
-        className={`rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none sm:px-8 ${className}`}
+        className={`rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none ${className}`}
       />
       {error && (
         <span className="mt-2 font-poppins font-semibold text-red-800">

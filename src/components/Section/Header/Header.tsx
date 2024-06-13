@@ -6,13 +6,16 @@ import CartSidebar from "../../Features/Cart/CartSidebar";
 import { useCartStore } from "../../../store/useCartStore";
 import { useCartSidebarStore } from "../../../store/useCartSidebarStore";
 import { useNavigationStore } from "../../../store/useNavigationStore";
+import { CgProfile } from "react-icons/cg";
+import { useProfileSidebarStore } from "../../../store/useProfileSidebarStore";
+import ProfileSidebar from "../../Features/Profile/ProfileSidebar";
 
 const Header = () => {
   const location = useLocation();
+  const itemCount = useCartStore((state) => state.itemCount);
   const openNavigation = useNavigationStore((state) => state.openNavigation);
   const openCart = useCartSidebarStore((state) => state.openCart);
-  const closeNavigation = useNavigationStore((state) => state.closeNavigation);
-  const itemCount = useCartStore((state) => state.itemCount);
+  const openProfile = useProfileSidebarStore((state) => state.openProfile);
 
   const toggleNavigation = useNavigationStore(
     (state) => state.toggleNavigation,
@@ -20,6 +23,11 @@ const Header = () => {
   const toggleCartSidebar = useCartSidebarStore(
     (state) => state.toggleCartSidebar,
   );
+  const toggleProfileSidebar = useProfileSidebarStore(
+    (state) => state.toggleProfileSidebar,
+  );
+
+  const closeNavigation = useNavigationStore((state) => state.closeNavigation);
 
   return (
     <header
@@ -60,7 +68,7 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center justify-center gap-4">
-          <div className="relative">
+          <div className="relative flex items-center justify-between gap-4">
             <img
               width={25}
               onClick={toggleCartSidebar}
@@ -68,6 +76,13 @@ const Header = () => {
               src={cart}
               alt="Cart"
             />
+
+            <CgProfile
+              className="cursor-pointer"
+              onClick={toggleProfileSidebar}
+              size={21}
+            />
+
             {itemCount > 0 && (
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white">
                 {itemCount}
@@ -85,6 +100,15 @@ const Header = () => {
             <div className="fixed inset-0 z-40 bg-color-7/40"></div>
             <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
               <CartSidebar />
+            </div>
+          </>
+        )}
+
+        {openProfile && (
+          <>
+            <div className="fixed inset-0 z-40 bg-color-7/40"></div>
+            <div className="fixed right-0 top-0 z-50 h-[250px] w-[80%] sm:w-[350px]">
+              <ProfileSidebar />
             </div>
           </>
         )}
