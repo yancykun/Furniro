@@ -13,32 +13,57 @@ const AccountSidebar = () => {
   return (
     <>
       {isLoggedIn ? (
-        <div className="grid">
+        <>
           <div className="flex items-center gap-2 sm:gap-4">
             <CgProfile className="cursor-pointer" size={35} />
             <p className="font-poppins text-sm text-color-6 sm:text-base">
               yancygarret@gmail.com
             </p>
           </div>
-          <Link to="/cart">
+          <div className="mt-6 flex gap-4">
+            <Link to="/cart">
+              <Button
+                white
+                onClick={closeProfileSidebar}
+                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+              >
+                Cart
+              </Button>
+            </Link>
             <Button
               white
               onClick={closeProfileSidebar}
-              className="mt-4 h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
+              className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
             >
-              Cart
+              Logout
             </Button>
-          </Link>
-          <Button
-            white
-            className="mt-2 h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
-          >
-            Logout
-          </Button>
-        </div>
+          </div>
+        </>
       ) : (
         <div>
-          <p>You are not logged in.</p>
+          <p className="font-poppins text-xl font-semibold">
+            You are not logged in.
+          </p>
+          <div className="mt-6 flex items-center justify-start gap-4">
+            <Link to="/signin">
+              <Button
+                white
+                onClick={closeProfileSidebar}
+                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+              >
+                Sign in
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button
+                white
+                onClick={closeProfileSidebar}
+                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+              >
+                Sign up
+              </Button>
+            </Link>
+          </div>
         </div>
       )}
     </>

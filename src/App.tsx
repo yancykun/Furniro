@@ -13,6 +13,8 @@ import ScrollToTop from "./components/Features/ScrollToTop/ScrollToTop";
 import ProfileSidebar from "./components/Features/Profile/ProfileSidebar";
 import { useCartSidebarStore } from "./store/useCartSidebarStore";
 import { useProfileSidebarStore } from "./store/useProfileSidebarStore";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 const App = () => {
   const openCart = useCartSidebarStore((state) => state.openCart);
   const openProfile = useProfileSidebarStore((state) => state.openProfile);
@@ -31,6 +33,8 @@ const App = () => {
         <Route path="/shop/:productId" element={<SingleProductPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/billing" element={<BillingPage />} />
+        <Route path="/signin" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
       </Routes>
       {openCart && (
         <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">

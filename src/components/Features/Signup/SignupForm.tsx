@@ -23,9 +23,6 @@ const SignupForm = () => {
     <form
       onSubmit={handleSubmit((data) => onSubmit(data, handleAccountSubmit))}
     >
-      <h1 className="font-poppins text-base font-semibold md:text-xl lg:text-2xl">
-        Welcome back
-      </h1>
       <div>
         <FormField
           label="Email"
