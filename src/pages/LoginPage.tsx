@@ -1,4 +1,4 @@
-import LoginForm from "../components/Features/Login/LoginForm";
+import LoginForm from "../auth/LoginForm";
 import Section from "../components/Layout/Section";
 
 const LoginPage = () => {
