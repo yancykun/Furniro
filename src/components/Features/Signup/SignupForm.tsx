@@ -30,13 +30,22 @@ const SignupForm = () => {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.password);
       console.log("Account form success", data);
-      reset(); // Reset form state
-      navigate("/"); // Navigate to home page after signup success
+      reset();
+      navigate("/");
     } catch (error) {
       const authError = error as AuthError;
+      let errorMessage = "An error occurred. Please try again.";
+      if (authError.code === "auth/email-already-in-use") {
+        errorMessage = "This email is already in use.";
+      } else if (authError.code === "auth/invalid-email") {
+        errorMessage = "Invalid email address.";
+      } else if (authError.code === "auth/weak-password") {
+        errorMessage = "Password should be at least 8 characters.";
+      }
+      console.error("Signup error:", authError);
       setError("root", {
         type: "manual",
-        message: authError.message,
+        message: errorMessage,
       });
     }
   };
@@ -46,12 +55,20 @@ const SignupForm = () => {
     try {
       await signInWithPopup(auth, provider);
       console.log("Google sign up success");
-      navigate("/"); // Navigate to home page after Google signup success
+      navigate("/");
     } catch (error) {
       const authError = error as AuthError;
+      let errorMessage = "An error occurred. Please try again.";
+      if (authError.code === "auth/popup-closed-by-user") {
+        errorMessage =
+          "Sign-in popup was closed before completing the sign-in.";
+      } else if (authError.code === "auth/cancelled-popup-request") {
+        errorMessage = "Only one popup request is allowed at one time.";
+      }
+      console.error("Google sign-up error:", authError);
       setError("root", {
         type: "manual",
-        message: authError.message,
+        message: errorMessage,
       });
     }
   };

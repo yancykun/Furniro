@@ -86,13 +86,21 @@ const Header = () => {
 
         <div className="flex items-center justify-center gap-4">
           <div className="relative flex items-center justify-between gap-4">
-            <img
-              width={25}
-              onClick={toggleCartSidebar}
-              className="cursor-pointer"
-              src={cart}
-              alt="Cart"
-            />
+            <div className="relative">
+              <img
+                width={25}
+                onClick={toggleCartSidebar}
+                className="relative cursor-pointer"
+                src={cart}
+                alt="Cart"
+              />
+
+              {itemCount > 0 && (
+                <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white">
+                  {itemCount}
+                </span>
+              )}
+            </div>
 
             {userPhoto ? (
               <img
@@ -108,12 +116,6 @@ const Header = () => {
                 onClick={toggleProfileSidebar}
                 size={21}
               />
-            )}
-
-            {itemCount > 0 && (
-              <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white">
-                {itemCount}
-              </span>
             )}
           </div>
 

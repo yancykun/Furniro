@@ -34,9 +34,19 @@ const LoginForm = () => {
       navigate("/");
     } catch (error) {
       const authError = error as AuthError;
+      let errorMessage = "An error occurred. Please try again.";
+      if (authError.code === "auth/user-not-found") {
+        errorMessage = "No user found with this email.";
+      } else if (authError.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password.";
+      } else if (authError.code === "auth/too-many-requests") {
+        errorMessage =
+          "Too many unsuccessful login attempts. Please try again later.";
+      }
+      console.error("Login error:", authError);
       setError("root", {
         type: "manual",
-        message: authError.message,
+        message: errorMessage,
       });
     }
   };
@@ -49,9 +59,17 @@ const LoginForm = () => {
       navigate("/");
     } catch (error) {
       const authError = error as AuthError;
+      let errorMessage = "An error occurred. Please try again.";
+      if (authError.code === "auth/popup-closed-by-user") {
+        errorMessage =
+          "Sign-in popup was closed before completing the sign-in.";
+      } else if (authError.code === "auth/cancelled-popup-request") {
+        errorMessage = "Only one popup request is allowed at one time.";
+      }
+      console.error("Google sign-in error:", authError);
       setError("root", {
         type: "manual",
-        message: authError.message,
+        message: errorMessage,
       });
     }
   };
