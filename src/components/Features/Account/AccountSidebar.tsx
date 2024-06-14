@@ -66,7 +66,7 @@ const AccountSidebar = () => {
               <Button
                 white
                 onClick={closeProfileSidebar}
-                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+                className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
               >
                 Cart
               </Button>
@@ -74,7 +74,7 @@ const AccountSidebar = () => {
             <Button
               white
               onClick={handleLogout}
-              className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+              className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
             >
               Logout
             </Button>
@@ -90,7 +90,7 @@ const AccountSidebar = () => {
               <Button
                 white
                 onClick={closeProfileSidebar}
-                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+                className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
               >
                 Sign in
               </Button>
@@ -99,7 +99,7 @@ const AccountSidebar = () => {
               <Button
                 white
                 onClick={closeProfileSidebar}
-                className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
+                className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-medium"
               >
                 Sign up
               </Button>
