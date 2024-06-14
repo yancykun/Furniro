@@ -1,10 +1,17 @@
+import {
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  AuthError,
+} from "firebase/auth";
+import { auth } from "../../../firebase";
 import LineIcon from "../../../assets/svg/LineIcon";
 import useFormHandler from "../../../hooks/useFormHandler";
 import { AccountFormData, AccountSchema } from "../../../types/types";
 import Button from "../../UI/Button";
 import FormField from "../../UI/FormField";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const {
@@ -13,10 +20,40 @@ const LoginForm = () => {
     formState: { errors, isSubmitting },
     successMessage,
     onSubmit,
+    setError,
+    reset,
   } = useFormHandler(AccountSchema);
 
-  const handleAccountSubmit = (data: AccountFormData) => {
-    console.log("Account form success", data);
+  const navigate = useNavigate();
+
+  const handleAccountSubmit = async (data: AccountFormData) => {
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      console.log("Account form success", data);
+      reset();
+      navigate("/");
+    } catch (error) {
+      const authError = error as AuthError;
+      setError("root", {
+        type: "manual",
+        message: authError.message,
+      });
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google sign in success");
+      navigate("/");
+    } catch (error) {
+      const authError = error as AuthError;
+      setError("root", {
+        type: "manual",
+        message: authError.message,
+      });
+    }
   };
 
   return (
@@ -52,6 +89,11 @@ const LoginForm = () => {
             {errors.root.message}
           </div>
         )}
+        {errors.root && (
+          <div className="mb-4 font-poppins font-semibold text-red-800">
+            {errors.root.message}
+          </div>
+        )}
         {successMessage && (
           <div className="mb-4 font-poppins font-semibold text-green-800">
             {successMessage}
@@ -77,13 +119,14 @@ const LoginForm = () => {
             disabled={isSubmitting}
             type="button"
             className="relative my-2 flex h-[2.875rem] w-[13rem] items-center justify-center rounded-md border pl-6 font-medium sm:h-[3rem] sm:w-[17rem]"
+            onClick={handleGoogleLogin}
           >
             <FcGoogle className="absolute -left-6 top-1/2 -translate-y-1/2" />
             Sign in with Google
           </Button>
         </div>
         <div className="mt-2 flex items-center justify-start gap-2">
-          <p className="font-poppins font-medium">Don't have an accout?</p>
+          <p className="font-poppins font-medium">Don't have an account?</p>
           <Link to="/signup">
             <p className="font-poppins font-semibold text-color-4">Sign up</p>
           </Link>

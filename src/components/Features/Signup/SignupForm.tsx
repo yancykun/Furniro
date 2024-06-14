@@ -1,3 +1,10 @@
+import {
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  AuthError,
+} from "firebase/auth";
+import { auth } from "../../../firebase";
 import LineIcon from "../../../assets/svg/LineIcon";
 import useFormHandler from "../../../hooks/useFormHandler";
 import { AccountFormData, AccountSchema } from "../../../types/types";
@@ -13,10 +20,36 @@ const SignupForm = () => {
     formState: { errors, isSubmitting },
     successMessage,
     onSubmit,
+    setError,
+    reset,
   } = useFormHandler(AccountSchema);
 
-  const handleAccountSubmit = (data: AccountFormData) => {
-    console.log("Account form success", data);
+  const handleAccountSubmit = async (data: AccountFormData) => {
+    try {
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      console.log("Account form success", data);
+      reset();
+    } catch (error) {
+      const authError = error as AuthError;
+      setError("root", {
+        type: "manual",
+        message: authError.message,
+      });
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      console.log("Google sign up success");
+    } catch (error) {
+      const authError = error as AuthError;
+      setError("root", {
+        type: "manual",
+        message: authError.message,
+      });
+    }
   };
 
   return (
@@ -77,6 +110,7 @@ const SignupForm = () => {
             disabled={isSubmitting}
             type="button"
             className="relative my-2 flex h-[2.875rem] w-[13rem] items-center justify-center rounded-md border pl-6 font-medium sm:h-[3rem] sm:w-[17rem]"
+            onClick={handleGoogleSignup}
           >
             <FcGoogle className="absolute -left-6 top-1/2 -translate-y-1/2" />
             Sign up with Google

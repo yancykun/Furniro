@@ -1,23 +1,64 @@
+import { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import Button from "../../UI/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useProfileSidebarStore } from "../../../store/useProfileSidebarStore";
-import { useState } from "react";
+import { auth } from "../../../firebase"; // Adjust the path according to your file structure
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const AccountSidebar = () => {
-  const [isLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userPhoto, setUserPhoto] = useState("");
   const closeProfileSidebar = useProfileSidebarStore(
     (state) => state.closeProfileSidebar,
   );
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setIsLoggedIn(true);
+        setUserEmail(user.email || "");
+        setUserPhoto(user.photoURL || "");
+        navigate("/"); // Redirect to home page
+      } else {
+        setIsLoggedIn(false);
+        setUserEmail("");
+        setUserPhoto("");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      closeProfileSidebar();
+      navigate("/signin"); // Redirect to home page after logout
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   return (
     <>
       {isLoggedIn ? (
         <>
           <div className="flex items-center gap-2 sm:gap-4">
-            <CgProfile className="cursor-pointer" size={35} />
+            {userPhoto ? (
+              <img
+                src={userPhoto}
+                alt="Profile"
+                className="cursor-pointer rounded-full"
+                style={{ width: 35, height: 35 }}
+              />
+            ) : (
+              <CgProfile className="cursor-pointer" size={35} />
+            )}
             <p className="font-poppins text-sm text-color-6 sm:text-base">
-              yancygarret@gmail.com
+              {userEmail}
             </p>
           </div>
           <div className="mt-6 flex gap-4">
@@ -32,7 +73,7 @@ const AccountSidebar = () => {
             </Link>
             <Button
               white
-              onClick={closeProfileSidebar}
+              onClick={handleLogout}
               className="h-[30px] w-[100px] rounded-[50px] font-poppins text-xs font-medium"
             >
               Logout

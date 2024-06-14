@@ -9,6 +9,9 @@ import { useNavigationStore } from "../../../store/useNavigationStore";
 import { CgProfile } from "react-icons/cg";
 import { useProfileSidebarStore } from "../../../store/useProfileSidebarStore";
 import ProfileSidebar from "../../Features/Profile/ProfileSidebar";
+import { useEffect, useState } from "react";
+import { auth } from "../../../firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 const Header = () => {
   const location = useLocation();
@@ -28,6 +31,20 @@ const Header = () => {
   );
 
   const closeNavigation = useNavigationStore((state) => state.closeNavigation);
+
+  const [userPhoto, setUserPhoto] = useState("");
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUserPhoto(user.photoURL || "");
+      } else {
+        setUserPhoto("");
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   return (
     <header
@@ -77,11 +94,21 @@ const Header = () => {
               alt="Cart"
             />
 
-            <CgProfile
-              className="cursor-pointer"
-              onClick={toggleProfileSidebar}
-              size={21}
-            />
+            {userPhoto ? (
+              <img
+                src={userPhoto}
+                alt="Profile"
+                className="cursor-pointer rounded-full"
+                style={{ width: 21, height: 21 }}
+                onClick={toggleProfileSidebar}
+              />
+            ) : (
+              <CgProfile
+                className="cursor-pointer"
+                onClick={toggleProfileSidebar}
+                size={21}
+              />
+            )}
 
             {itemCount > 0 && (
               <span className="absolute -right-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-600 text-xs text-white">
