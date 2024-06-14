@@ -39,7 +39,7 @@ const LoginForm = () => {
       if (authError.code === "auth/invalid-credential") {
         errorMessage = "Invalid email or password.";
       } else if (authError.code === "auth/too-many-requests") {
-        errorMessage = "Too many requests";
+        errorMessage = "Too many requests.";
       }
       console.error("Login error:", authError);
       setError("root", {
