@@ -11,7 +11,7 @@ import { AccountFormData, AccountSchema } from "../../../types/types";
 import Button from "../../UI/Button";
 import FormField from "../../UI/FormField";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
   const {
@@ -24,11 +24,14 @@ const SignupForm = () => {
     reset,
   } = useFormHandler(AccountSchema);
 
+  const navigate = useNavigate(); // Hook for navigation
+
   const handleAccountSubmit = async (data: AccountFormData) => {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.password);
       console.log("Account form success", data);
-      reset();
+      reset(); // Reset form state
+      navigate("/"); // Navigate to home page after signup success
     } catch (error) {
       const authError = error as AuthError;
       setError("root", {
@@ -43,6 +46,7 @@ const SignupForm = () => {
     try {
       await signInWithPopup(auth, provider);
       console.log("Google sign up success");
+      navigate("/"); // Navigate to home page after Google signup success
     } catch (error) {
       const authError = error as AuthError;
       setError("root", {
@@ -117,7 +121,7 @@ const SignupForm = () => {
           </Button>
         </div>
         <div className="mt-2 flex items-center justify-start gap-2">
-          <p className="font-poppins font-medium">Already have an accout?</p>
+          <p className="font-poppins font-medium">Already have an account?</p>
           <Link to="/signin">
             <p className="font-poppins font-semibold text-color-4">Sign in</p>
           </Link>
