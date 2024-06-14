@@ -22,7 +22,7 @@ const FormField = <T extends FieldValues>({
         className={`rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none ${className}`}
       />
       {error && (
-        <span className="mt-2 font-poppins font-semibold text-red-800">
+        <span className="mt-2 max-w-[350px] font-poppins font-semibold text-red-800">
           {error.message}
         </span>
       )}

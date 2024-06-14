@@ -1,13 +1,11 @@
 import LoginForm from "../components/Features/Login/LoginForm";
+import Section from "../components/Layout/Section";
 
 const LoginPage = () => {
   return (
-    <div>
-      <h1 className="font-poppins text-base font-semibold md:text-xl lg:text-2xl">
-        Welcome back
-        <LoginForm />
-      </h1>
-    </div>
+    <Section className="mt-20">
+      <LoginForm />
+    </Section>
   );
 };
 

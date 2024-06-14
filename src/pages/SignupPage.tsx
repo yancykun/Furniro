@@ -1,13 +1,11 @@
 import SignupForm from "../components/Features/Signup/SignupForm";
+import Section from "../components/Layout/Section";
 
 const SignupPage = () => {
   return (
-    <>
-      <h1 className="font-poppins text-base font-semibold md:text-xl lg:text-2xl">
-        Welcome back
-      </h1>
+    <Section className="mt-20">
       <SignupForm />
-    </>
+    </Section>
   );
 };
 

@@ -55,7 +55,7 @@ const useFormHandler = <T extends FieldValues>(
     try {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       onSuccess(data);
-      setSuccessMessage("Submission was successful!");
+      setSuccessMessage("Form was successful!");
       reset();
     } catch (error) {
       setError("root", {
