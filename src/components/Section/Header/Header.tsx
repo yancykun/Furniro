@@ -99,7 +99,7 @@ const Header = () => {
                 src={userPhoto}
                 alt="Profile"
                 className="cursor-pointer rounded-full"
-                style={{ width: 21, height: 21 }}
+                style={{ width: 23, height: 23 }}
                 onClick={toggleProfileSidebar}
               />
             ) : (

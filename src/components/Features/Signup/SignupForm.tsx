@@ -24,7 +24,7 @@ const SignupForm = () => {
     reset,
   } = useFormHandler(AccountSchema);
 
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate();
 
   const handleAccountSubmit = async (data: AccountFormData) => {
     try {

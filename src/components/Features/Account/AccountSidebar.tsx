@@ -51,8 +51,9 @@ const AccountSidebar = () => {
               <img
                 src={userPhoto}
                 alt="Profile"
+                height={35}
+                width={35}
                 className="cursor-pointer rounded-full"
-                style={{ width: 35, height: 35 }}
               />
             ) : (
               <CgProfile className="cursor-pointer" size={35} />
