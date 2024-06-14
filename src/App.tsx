@@ -44,7 +44,7 @@ const App = () => {
       {openProfile && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
       {openProfile && (
         <>
-          <div className="fixed right-0 top-0 z-50 h-[250px] w-[80%] sm:w-[350px]">
+          <div className="fixed right-0 top-0 z-50 h-[190px] w-[80%] sm:w-[350px]">
             <ProfileSidebar />
           </div>
         </>

@@ -6,23 +6,24 @@ import {
 } from "firebase/auth";
 import { auth } from "../../../firebase";
 import LineIcon from "../../../assets/svg/LineIcon";
-import useFormHandler from "../../../hooks/useFormHandler";
 import { AccountFormData, AccountSchema } from "../../../types/types";
 import Button from "../../UI/Button";
 import FormField from "../../UI/FormField";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    successMessage,
-    onSubmit,
     setError,
     reset,
-  } = useFormHandler(AccountSchema);
+  } = useForm<AccountFormData>({
+    resolver: zodResolver(AccountSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -35,13 +36,10 @@ const LoginForm = () => {
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An error occurred. Please try again.";
-      if (authError.code === "auth/user-not-found") {
-        errorMessage = "No user found with this email.";
-      } else if (authError.code === "auth/wrong-password") {
-        errorMessage = "Incorrect password.";
+      if (authError.code === "auth/invalid-credential") {
+        errorMessage = "Invalid email or password.";
       } else if (authError.code === "auth/too-many-requests") {
-        errorMessage =
-          "Too many unsuccessful login attempts. Please try again later.";
+        errorMessage = "Too many requests";
       }
       console.error("Login error:", authError);
       setError("root", {
@@ -55,7 +53,7 @@ const LoginForm = () => {
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
-      console.log("Google sign in success");
+      console.log("Google sign-in success");
       navigate("/");
     } catch (error) {
       const authError = error as AuthError;
@@ -77,7 +75,7 @@ const LoginForm = () => {
   return (
     <form
       className="grid w-full items-center justify-center"
-      onSubmit={handleSubmit((data) => onSubmit(data, handleAccountSubmit))}
+      onSubmit={handleSubmit(handleAccountSubmit)}
     >
       <div className="grid items-center justify-center">
         <h1 className="mb-6 text-center font-poppins text-lg font-bold text-color-7 md:text-xl lg:text-2xl">
@@ -107,28 +105,18 @@ const LoginForm = () => {
             {errors.root.message}
           </div>
         )}
-        {errors.root && (
-          <div className="mb-4 font-poppins font-semibold text-red-800">
-            {errors.root.message}
-          </div>
-        )}
-        {successMessage && (
-          <div className="mb-4 font-poppins font-semibold text-green-800">
-            {successMessage}
-          </div>
-        )}
         <div className="grid justify-center">
           <Button
             disabled={isSubmitting}
             type="submit"
             className="my-2 h-[2.875rem] w-[9rem] rounded-md border font-medium sm:h-[3rem] sm:w-[12rem]"
           >
-            Sign in
+            {isSubmitting ? "Signing in" : "Sign in"}
           </Button>
         </div>
         <div className="flex items-center justify-center gap-4">
           <LineIcon />
-          <span className="font-poppin text-[1.25rem] font-semibold">or</span>
+          <span className="font-poppins text-[1.25rem] font-semibold">or</span>
           <LineIcon />
         </div>
         <div className="relative grid justify-center">

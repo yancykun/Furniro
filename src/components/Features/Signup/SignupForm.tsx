@@ -6,23 +6,24 @@ import {
 } from "firebase/auth";
 import { auth } from "../../../firebase";
 import LineIcon from "../../../assets/svg/LineIcon";
-import useFormHandler from "../../../hooks/useFormHandler";
 import { AccountFormData, AccountSchema } from "../../../types/types";
 import Button from "../../UI/Button";
 import FormField from "../../UI/FormField";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 const SignupForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    successMessage,
-    onSubmit,
     setError,
     reset,
-  } = useFormHandler(AccountSchema);
+  } = useForm<AccountFormData>({
+    resolver: zodResolver(AccountSchema),
+  });
 
   const navigate = useNavigate();
 
@@ -37,10 +38,6 @@ const SignupForm = () => {
       let errorMessage = "An error occurred. Please try again.";
       if (authError.code === "auth/email-already-in-use") {
         errorMessage = "This email is already in use.";
-      } else if (authError.code === "auth/invalid-email") {
-        errorMessage = "Invalid email address.";
-      } else if (authError.code === "auth/weak-password") {
-        errorMessage = "Password should be at least 8 characters.";
       }
       console.error("Signup error:", authError);
       setError("root", {
@@ -76,11 +73,11 @@ const SignupForm = () => {
   return (
     <form
       className="grid w-full items-center justify-center"
-      onSubmit={handleSubmit((data) => onSubmit(data, handleAccountSubmit))}
+      onSubmit={handleSubmit(handleAccountSubmit)}
     >
       <div className="grid items-center justify-center">
         <h1 className="mb-6 text-center font-poppins text-lg font-bold text-color-7 md:text-xl lg:text-2xl">
-          Welcome back
+          Create an Account
         </h1>
         <div>
           <FormField
@@ -106,23 +103,18 @@ const SignupForm = () => {
             {errors.root.message}
           </div>
         )}
-        {successMessage && (
-          <div className="mb-4 font-poppins font-semibold text-green-800">
-            {successMessage}
-          </div>
-        )}
         <div className="grid justify-center">
           <Button
             disabled={isSubmitting}
             type="submit"
             className="my-2 h-[2.875rem] w-[9rem] rounded-md border font-medium sm:h-[3rem] sm:w-[12rem]"
           >
-            Sign up
+            {isSubmitting ? "Signing up" : "Sign up"}
           </Button>
         </div>
         <div className="flex items-center justify-center gap-4">
           <LineIcon />
-          <span className="font-poppin text-[1.25rem] font-semibold">or</span>
+          <span className="font-poppins text-[1.25rem] font-semibold">or</span>
           <LineIcon />
         </div>
         <div className="relative grid justify-center">
