@@ -20,7 +20,7 @@ export type Product = {
   category: string;
   rating: number;
   popularity: number;
-  isFeatured: boolean;
+  featured: boolean;
   url: string;
   description: string;
 };

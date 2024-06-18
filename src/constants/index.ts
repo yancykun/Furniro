@@ -452,7 +452,7 @@ export const products = [
     isFeatured: false,
     url: "/shop/24",
     description:
-      "The Aero Desk combines style and practicality. Its modern design features a tempered glass top and metal frame, providing a sleek design",
+      "The Aero Desk combines style and practicality. Its modern design features a tempered glass top and metal frame, providing a sleek design.",
   },
 ];
 

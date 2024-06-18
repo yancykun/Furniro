@@ -1,3 +1,5 @@
+// Product.tsx
+import { useEffect } from "react";
 import Section from "../../Layout/Section";
 import ProductCard from "../../Features/Product/ProductCard";
 import { useProductStore } from "../../../store/useProductStore";
@@ -7,6 +9,11 @@ const Product = () => {
   const showMore = useProductStore((state) => state.showMore);
   const visibleProducts = useProductStore((state) => state.visibleProducts);
   const handleShowMore = useProductStore((state) => state.handleShowMore);
+  const fetchProducts = useProductStore((state) => state.fetchProducts);
+
+  useEffect(() => {
+    fetchProducts(); // Fetch products from Firestore on component mount
+  }, [fetchProducts]);
 
   return (
     <Section id="shop">
