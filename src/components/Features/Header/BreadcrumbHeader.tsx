@@ -2,9 +2,12 @@ import React from "react";
 import Header from "../../Section/Header/Header";
 import ArrowIcon from "../../../assets/svg/ArrowIcon";
 import { useLocation } from "react-router-dom";
-import { categories, navigation, products } from "../../../constants/index";
+import { categories, navigation } from "../../../constants/index";
+import { useProducts } from "../../../hooks/useProducts";
 
 const BreadcrumbHeader = () => {
+  const { data } = useProducts();
+  const products = data || [];
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
 

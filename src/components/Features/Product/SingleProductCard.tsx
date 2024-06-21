@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
-import { products } from "../../../constants/index";
 import StarRating from "../StarRating/StarRating";
 import Button from "../../UI/Button";
 import { useState } from "react";
 import { useCartStore } from "../../../store/useCartStore";
+import { useProducts } from "../../../hooks/useProducts";
 
 const SingleProductCard = () => {
+  const { data } = useProducts();
   const [count, setCount] = useState<number>(1);
 
+  const products = data || [];
   const addToCart = useCartStore((state) => state.addToCart);
 
   const increment = () => {

@@ -1,32 +1,36 @@
 import { useParams } from "react-router-dom";
 import ProductCard from "../../Features/Product/ProductCard";
 import FeatureProduct from "../../Features/Feature/FeatureProduct";
-import { useProductStore } from "../../../store/useProductStore";
-import { useEffect } from "react";
+import Loading from "../../UI/Loading";
+import Error from "../../UI/Error";
+import { useProducts } from "../../../hooks/useProducts";
 
 const CategoryGallery = () => {
   const { category } = useParams<{ category: string }>();
-  const filteredProductsByCategory = useProductStore(
-    (state) => state.filteredProductsByCategory,
-  );
-  const filteredProducts = useProductStore((state) => state.filteredProducts);
+  const { data, error, isLoading } = useProducts();
 
-  useEffect(() => {
-    if (category) {
-      filteredProductsByCategory(category);
-    }
-  }, [category, filteredProductsByCategory]);
+  const products = data || [];
+
+  const filteredProducts = products.filter(
+    (product) => product.category === category,
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (error) {
+    return <Error message={error.message} />;
+  }
 
   return (
-    <>
-      <div>
-        {category ? (
-          <ProductCard products={filteredProducts} />
-        ) : (
-          <FeatureProduct />
-        )}
-      </div>
-    </>
+    <div>
+      {category ? (
+        <ProductCard products={filteredProducts} />
+      ) : (
+        <FeatureProduct />
+      )}
+    </div>
   );
 };
 
