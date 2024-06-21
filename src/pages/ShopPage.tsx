@@ -4,16 +4,11 @@ import ProductCard from "../components/Features/Product/ProductCard";
 import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
 import { useProducts } from "../hooks/useProducts";
 import Error from "../components/UI/Error";
-import Loading from "../components/UI/Loading";
 
 const ShopPage = () => {
-  const { data, error, isLoading } = useProducts();
+  const { data, error } = useProducts();
 
   const products = data || [];
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   if (error) {
     return <Error message={error.message} />;

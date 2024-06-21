@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import Button from "../../UI/Button";
 import { Product } from "../../../types/types";
 import StarRating from "../StarRating/StarRating";
+import { useProducts } from "../../../hooks/useProducts";
+import Section from "../../Layout/Section";
+import SkeletonLoading from "../../UI/SkeletonLoading";
 
 type ProductCardProps = {
   products: Product[];
@@ -16,11 +19,25 @@ const ProductCard = ({
   visibleProducts = products.length,
   handleShowMore,
 }: ProductCardProps) => {
+  const { isLoading } = useProducts();
+
+  if (isLoading) {
+    return (
+      <Section>
+        <div className="mx-auto mb-5 grid w-fit grid-cols-1 justify-center justify-items-center gap-x-14 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+          {[...Array(6)].map((_, index) => (
+            <SkeletonLoading key={index} />
+          ))}
+        </div>
+      </Section>
+    );
+  }
+
   return (
     <>
       <div className="mx-auto mb-5 grid w-fit grid-cols-1 justify-center justify-items-center gap-x-14 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
         {products.slice(0, visibleProducts).map((product) => (
-          <div className="relative flex flex-col" key={product.id}>
+          <div className="relative grid" key={product.id}>
             <Link to={product.url}>
               <img
                 className="mb-4 h-[300px] w-[292px] cursor-pointer rounded-xl object-cover"
