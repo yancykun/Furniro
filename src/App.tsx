@@ -8,17 +8,14 @@ import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
 import Header from "./components/Section/Header/Header";
-import CartSidebar from "./components/Features/Cart/CartSidebar";
 import ScrollToTop from "./components/Features/ScrollToTop/ScrollToTop";
-import ProfileSidebar from "./components/Features/Profile/ProfileSidebar";
-import { useCartSidebarStore } from "./store/useCartSidebarStore";
-import { useProfileSidebarStore } from "./store/useProfileSidebarStore";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-const App = () => {
-  const openCart = useCartSidebarStore((state) => state.openCart);
-  const openProfile = useProfileSidebarStore((state) => state.openProfile);
+import SidebarOverlay from "./components/Features/Header/SidebarOverlay";
+import CartSidebarComponent from "./components/Features/Cart/CartSidebarComponent";
+import ProfileSidebarComponent from "./components/Features/Profile/ProfileSidebarComponent";
 
+const App = () => {
   return (
     <>
       <Header />
@@ -35,20 +32,9 @@ const App = () => {
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
       </Routes>
-      {openCart && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
-      {openCart && (
-        <div className="fixed right-0 top-0 z-50 h-[550px] w-[80%] sm:w-[417px]">
-          <CartSidebar />
-        </div>
-      )}
-      {openProfile && <div className="fixed inset-0 z-40 bg-color-7/40"></div>}
-      {openProfile && (
-        <>
-          <div className="fixed right-0 top-0 z-50 h-[190px] w-[80%] sm:w-[350px]">
-            <ProfileSidebar />
-          </div>
-        </>
-      )}
+      <CartSidebarComponent />
+      <ProfileSidebarComponent />
+      <SidebarOverlay />
     </>
   );
 };

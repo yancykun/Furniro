@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../Section/Header/Header";
 import ArrowIcon from "../../../assets/svg/ArrowIcon";
 import { useLocation } from "react-router-dom";
 import { categories, navigation } from "../../../constants/index";
@@ -54,7 +53,6 @@ const BreadcrumbHeader = () => {
 
   return (
     <div className="relative w-full pt-[3.5rem] md:pt-[5rem]">
-      <Header />
       <div className="w-full bg-color-2 px-5 py-10 md:px-20">
         <div className="flex items-center justify-center gap-4 md:justify-start md:gap-8">
           {breadcrumbItems.map((item, index) => (

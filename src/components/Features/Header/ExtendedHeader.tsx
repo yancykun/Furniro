@@ -1,4 +1,3 @@
-import Header from "../../Section/Header/Header";
 import { furniro, headerImage } from "../../../assets";
 import ArrowIcon from "../../../assets/svg/ArrowIcon";
 import { useLocation } from "react-router-dom";
@@ -17,7 +16,6 @@ const ExtendedHeader = ({ customTitle }: ExtendedHeaderProps) => {
 
   return (
     <div className="relative mb-[50px] w-full pt-[3.5rem] md:pt-[5rem] lg:mb-[60px]">
-      <Header />
       <div className="relative">
         <img
           className="h-[310px] w-full object-cover opacity-40"
