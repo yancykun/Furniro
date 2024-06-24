@@ -3,7 +3,7 @@ import Section from "../components/Layout/Section";
 
 const LoginPage = () => {
   return (
-    <Section className="mt-21">
+    <Section className="mt-20">
       <LoginForm />
     </Section>
   );

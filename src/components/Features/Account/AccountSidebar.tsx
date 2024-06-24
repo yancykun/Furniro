@@ -21,7 +21,7 @@ const AccountSidebar = () => {
         setIsLoggedIn(true);
         setUserEmail(user.email || "");
         setUserPhoto(user.photoURL || "");
-        navigate("/"); // Redirect to home page
+        navigate("/");
       } else {
         setIsLoggedIn(false);
         setUserEmail("");

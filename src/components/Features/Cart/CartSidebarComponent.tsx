@@ -3,6 +3,7 @@ import CartSidebar from "./CartSidebar";
 
 const CartSidebarComponent = () => {
   const openCart = useCartSidebarStore((state) => state.openCart);
+
   return (
     <>
       {openCart && (

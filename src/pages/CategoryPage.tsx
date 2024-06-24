@@ -1,6 +1,6 @@
 import BreadcrumbHeader from "../components/Features/Header/BreadcrumbHeader";
 import CategoryShowcase from "../components/Features/Categories/CategoryShowcase";
-import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import FeatureShowcase from "../components/Features/Feature/FeaturesShowcase";
 import Footer from "../components/Section/Footer/Footer";
 
 const CategoryPage = () => {

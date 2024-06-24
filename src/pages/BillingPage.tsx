@@ -1,6 +1,6 @@
 import Billing from "../components/Features/Billing/Billing";
 import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
-import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import FeatureShowcase from "../components/Features/Feature/FeaturesShowcase";
 import Footer from "../components/Section/Footer/Footer";
 import Section from "../components/Layout/Section";
 

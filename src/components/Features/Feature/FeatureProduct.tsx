@@ -1,11 +1,16 @@
 import { useProducts } from "../../../hooks/useProducts";
-import ProductCard from "../../Features/Product/ProductCard";
 import Error from "../../UI/Error";
+import ProductList from "../Product/ProductList";
+import ProductSkeletonLoading from "../../UI/ProductSkeletonLoading";
 
 const FeatureProduct = () => {
-  const { data, error } = useProducts();
+  const { data, error, isLoading } = useProducts();
 
   const products = data || [];
+
+  if (isLoading) {
+    return <ProductSkeletonLoading />;
+  }
 
   if (error) {
     return <Error message={error.message} />;
@@ -18,7 +23,7 @@ const FeatureProduct = () => {
   return (
     <div className="grid">
       <h2 className="h2 mb-10 text-center">Popular Products</h2>
-      <ProductCard products={featuredProducts} />
+      <ProductList products={featuredProducts} />
     </div>
   );
 };

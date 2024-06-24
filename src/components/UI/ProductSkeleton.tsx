@@ -1,4 +1,4 @@
-const SkeletonLoading = () => {
+const ProductSkeleton = () => {
   return (
     <div className="relative grid">
       <div className="mb-4 h-[300px] w-[292px] animate-pulse rounded-xl bg-color-6/30"></div>
@@ -14,4 +14,4 @@ const SkeletonLoading = () => {
   );
 };
 
-export default SkeletonLoading;
+export default ProductSkeleton;

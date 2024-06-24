@@ -1,14 +1,19 @@
 import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
 import Footer from "../components/Section/Footer/Footer";
-import ProductCard from "../components/Features/Product/ProductCard";
-import FeatureShowcase from "../components/Features/Feature/FeatureShowcase";
+import FeatureShowcase from "../components/Features/Feature/FeaturesShowcase";
 import { useProducts } from "../hooks/useProducts";
 import Error from "../components/UI/Error";
+import ProductList from "../components/Features/Product/ProductList";
+import ProductSkeletonLoading from "../components/UI/ProductSkeletonLoading";
 
 const ShopPage = () => {
-  const { data, error } = useProducts();
+  const { data, error, isLoading } = useProducts();
 
   const products = data || [];
+
+  if (isLoading) {
+    return <ProductSkeletonLoading />;
+  }
 
   if (error) {
     return <Error message={error.message} />;
@@ -17,7 +22,7 @@ const ShopPage = () => {
   return (
     <>
       <ExtendedHeader />
-      <ProductCard products={products} />
+      <ProductList products={products} />
       <FeatureShowcase />
       <Footer />
     </>
