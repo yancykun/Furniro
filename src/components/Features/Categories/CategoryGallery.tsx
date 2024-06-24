@@ -1,19 +1,14 @@
 import { useParams } from "react-router-dom";
-import FeatureProduct from "../../Features/Feature/FeatureProduct";
+import PopularProducts from "../Feature/PopularProducts";
 import { useProducts } from "../../../hooks/useProducts";
 import ProductList from "../Product/ProductList";
-import ProductSkeletonLoading from "../../UI/ProductSkeletonLoading";
 import Error from "../../UI/Error";
 
 const CategoryGallery = () => {
   const { category } = useParams<{ category: string }>();
-  const { data, error, isLoading } = useProducts();
+  const { data, error } = useProducts();
 
   const products = data || [];
-
-  if (isLoading) {
-    return <ProductSkeletonLoading />;
-  }
 
   if (error) {
     return <Error message={error.message} />;
@@ -28,7 +23,7 @@ const CategoryGallery = () => {
       {category ? (
         <ProductList products={filteredProducts} />
       ) : (
-        <FeatureProduct />
+        <PopularProducts />
       )}
     </div>
   );
