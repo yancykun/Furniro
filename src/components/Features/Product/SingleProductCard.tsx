@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useProducts } from "../../../hooks/useProducts";
 import ProductDetails from "./ProductDetails";
+import ProductNotFound from "../../UI/ProductNotFound";
 
 const SingleProductCard = () => {
   const { productId } = useParams();
@@ -9,7 +10,7 @@ const SingleProductCard = () => {
   const product = products.find((product) => product.id === productId);
 
   if (!product) {
-    return <p>Product not found!</p>;
+    return <ProductNotFound />;
   }
 
   return (

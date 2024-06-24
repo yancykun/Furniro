@@ -38,6 +38,10 @@ import location from "../assets/icons/location.png";
 import clock from "../assets/icons/clock.png";
 import phone from "../assets/icons/phone.png";
 
+// 404
+import productNotFound from "../assets/404/productNotFound.png";
+import pageNotFound from "../assets/404/pageNotFound.png";
+
 export {
   logo,
   furniro,
@@ -63,4 +67,6 @@ export {
   phone,
   deleteItem,
   trashcan,
+  productNotFound,
+  pageNotFound,
 };

@@ -14,6 +14,7 @@ import SignupPage from "./pages/SignupPage";
 import SidebarOverlay from "./components/Features/Header/SidebarOverlay";
 import CartSidebarComponent from "./components/Features/Cart/CartSidebarComponent";
 import ProfileSidebarComponent from "./components/Features/Profile/ProfileSidebarComponent";
+import PageNotFound from "./components/UI/PageNotFound";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/billing" element={<BillingPage />} />
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
       <CartSidebarComponent />
       <ProfileSidebarComponent />
