@@ -1,16 +1,11 @@
 import { useProducts } from "../../../hooks/useProducts";
 import Error from "../../UI/Error";
 import ProductList from "../Product/ProductList";
-import ProductSkeletonLoading from "../../UI/ProductSkeletonLoading";
 
 const FeatureProduct = () => {
-  const { data, error, isLoading } = useProducts();
+  const { data, error } = useProducts();
 
   const products = data || [];
-
-  if (isLoading) {
-    return <ProductSkeletonLoading />;
-  }
 
   if (error) {
     return <Error message={error.message} />;

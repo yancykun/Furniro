@@ -14,7 +14,20 @@ const Product = () => {
   const products = data || [];
 
   if (isLoading) {
-    return <ProductSkeletonLoading />;
+    return (
+      <>
+        <Section id="shop">
+          <h2 className="h2 mb-[2rem] text-center md:mb-[2.5rem] lg:mb-[4rem]">
+            Our Products
+          </h2>
+          <div className="mx-auto mb-5 grid w-fit grid-cols-1 justify-center justify-items-center gap-x-14 gap-y-20 md:grid-cols-2 lg:grid-cols-3">
+            {[...Array(visibleProducts)].map((_, index) => (
+              <ProductSkeletonLoading key={index} />
+            ))}
+          </div>
+        </Section>
+      </>
+    );
   }
 
   if (error) {
