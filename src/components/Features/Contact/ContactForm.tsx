@@ -1,31 +1,45 @@
 import Button from "../../UI/Button";
 import FormField from "../../UI/FormField";
 import { ContactFormData, ContactSchema } from "../../../types/types";
-import useFormHandler from "../../../hooks/useFormHandler";
-import useFormStore from "../../../store/useFormStore";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useFormMessageStore } from "../../../store/useFormMessageStore";
 
 const ContactForm = () => {
-  const clearSuccessMessage = useFormStore(
-    (state) => state.clearSuccessMessage,
-  );
+  const { successMessage, setSuccessMessage, clearSuccessMessage } =
+    useFormMessageStore();
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    successMessage,
-    onSubmit,
-  } = useFormHandler(ContactSchema);
+    reset,
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(ContactSchema),
+  });
 
-  const handleContactSubmit = (data: ContactFormData) => {
+  const handleContactSubmit = async (data: ContactFormData) => {
     console.log("Contact form success", data);
+
+    // Simulate async operation
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setSuccessMessage("Your message has been successfully sent!");
+
+    // Clear success message after 3 sec
+    setTimeout(() => {
+      clearSuccessMessage();
+    }, 3000);
+
+    // Reset the form fields after successful submission
+    reset();
   };
 
   return (
     <form
-      onSubmit={handleSubmit((data) => onSubmit(data, handleContactSubmit))}
+      onSubmit={handleSubmit(handleContactSubmit)}
       className="flex flex-col items-center xl:items-start"
     >
-      <div className="flex flex-col" onInput={clearSuccessMessage}>
+      <div className="flex flex-col">
         <FormField
           name="fullName"
           label="Your name"
@@ -33,6 +47,7 @@ const ContactForm = () => {
           className="h-[75px] w-full sm:w-[528px]"
           register={register}
           error={errors.fullName}
+          type="text"
         />
         <FormField
           name="email"
@@ -50,6 +65,7 @@ const ContactForm = () => {
           className="h-[75px] w-full sm:w-[528px]"
           register={register}
           error={errors.subject}
+          type="text"
         />
         <FormField
           name="message"
@@ -61,17 +77,15 @@ const ContactForm = () => {
           error={errors.message}
         />
       </div>
-      {errors.root && (
-        <div className="mb-4 font-poppins font-semibold text-red-800">
-          {errors.root.message}
-        </div>
-      )}
+
       {successMessage && (
         <div className="mb-4 font-poppins font-semibold text-green-800">
           {successMessage}
         </div>
       )}
+
       <Button
+        white
         disabled={isSubmitting}
         type="submit"
         className="mt-3 rounded-md border capitalize"

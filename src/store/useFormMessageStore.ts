@@ -1,15 +1,13 @@
 import { create } from "zustand";
 
-interface FormStore {
+type FormMessageProps = {
   successMessage: string;
   setSuccessMessage: (message: string) => void;
   clearSuccessMessage: () => void;
-}
+};
 
-const useFormStore = create<FormStore>((set) => ({
+export const useFormMessageStore = create<FormMessageProps>((set) => ({
   successMessage: "",
   setSuccessMessage: (message) => set({ successMessage: message }),
   clearSuccessMessage: () => set({ successMessage: "" }),
 }));
-
-export default useFormStore;

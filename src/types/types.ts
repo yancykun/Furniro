@@ -38,16 +38,20 @@ export type ValidFieldNames =
   | "email"
   | "additionalInfo"
   | "subject"
-  | "message";
+  | "message"
+  | "paymentMethod";
 
 export type FormFieldProps<T extends FieldValues> = {
-  type?: string;
+  type: string;
   placeholder?: string;
   name: Path<T>;
   register: UseFormRegister<T>;
   error: FieldError | undefined;
-  className: string;
+  className?: string;
   label?: string;
+  value?: string;
+  checked?: boolean;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type BillingFormData = {
@@ -61,6 +65,7 @@ export type BillingFormData = {
   phone: string;
   email: string;
   additionalInfo?: string;
+  paymentMethod?: string;
 };
 
 export const BillingSchema: ZodType<BillingFormData> = z.object({

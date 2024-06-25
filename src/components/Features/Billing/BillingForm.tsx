@@ -1,52 +1,85 @@
 import FormField from "../../UI/FormField";
 import Button from "../../UI/Button";
 import { useState } from "react";
-import Radio from "../../UI/Radio";
-import useFormHandler from "../../../hooks/useFormHandler";
-
 import { BillingSchema, BillingFormData } from "../../../types/types";
 import { useCartStore } from "../../../store/useCartStore";
-import useFormStore from "../../../store/useFormStore";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import ProductBill from "./ProductBill";
+import { useFormMessageStore } from "../../../store/useFormMessageStore";
+
+type CartType = {
+  id: string;
+  title: string;
+  quantity: number;
+  price: number;
+};
+
+type CombinedFormData = BillingFormData & {
+  cart: CartType[];
+};
 
 const BillingForm = () => {
-  const [paymentMethod, setPaymentMethod] = useState("bankTransfer");
-  const clearSuccessMessage = useFormStore(
-    (state) => state.clearSuccessMessage,
-  );
+  const [paymentMethod, setPaymentMethod] = useState("Direct Bank Transfer");
+  const { successMessage, setSuccessMessage, clearSuccessMessage } =
+    useFormMessageStore();
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-    successMessage,
-    onSubmit,
-  } = useFormHandler(BillingSchema);
+    setValue,
+    reset,
+  } = useForm<BillingFormData>({
+    resolver: zodResolver(BillingSchema),
+  });
 
   const cart = useCartStore((state) => state.cart);
-  const getTotalPrice = useCartStore((state) => state.getTotalPrice);
 
-  const handleBillingSubmit = (data: BillingFormData) => {
-    console.log("Billing Success", data);
+  const handleBillingSubmit = async (data: BillingFormData) => {
+    const combinedData: CombinedFormData = {
+      ...data,
+      paymentMethod,
+      cart: cart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+    };
+    console.log("Billing Success", combinedData);
+
+    // Simulate async operation
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    setSuccessMessage("Your billing has been successfully sent!");
+
+    // Clear success message after 3 sec
+    setTimeout(() => {
+      clearSuccessMessage();
+    }, 3000);
+
+    // Reset form fields after successful submission
+    reset();
   };
 
-  const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
+    setValue("paymentMethod", event.target.value);
+  };
 
   return (
     <form
-      onSubmit={handleSubmit((data) => onSubmit(data, handleBillingSubmit))}
+      onSubmit={handleSubmit(handleBillingSubmit)}
       className="flex flex-col items-center justify-center gap-8 px-4 lg:flex-row lg:items-start"
     >
-      <div
-        onInput={clearSuccessMessage}
-        className="grid w-full justify-center md:w-[600px]"
-      >
+      <div className="grid w-full justify-center md:w-[600px]">
         <h3 className="mb-[2.35rem] font-poppins text-2xl font-semibold md:text-3xl lg:text-4xl">
           Billing details
         </h3>
 
         <div className="flex gap-2 sm:gap-6">
           <FormField
+            type="text"
             className="h-[60px] w-[160px] sm:h-[75px] sm:w-[211px]"
             label="First Name"
             name="firstName"
@@ -55,6 +88,7 @@ const BillingForm = () => {
             error={errors.firstName}
           />
           <FormField
+            type="text"
             className="h-[60px] w-[160px] sm:h-[75px] sm:w-[211px]"
             label="Last Name"
             name="lastName"
@@ -64,6 +98,7 @@ const BillingForm = () => {
           />
         </div>
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Company Name (Optional)"
           name="company"
@@ -71,6 +106,7 @@ const BillingForm = () => {
           error={errors.company}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Country/ Region"
           name="country"
@@ -79,6 +115,7 @@ const BillingForm = () => {
           error={errors.country}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Street address"
           name="streetAddress"
@@ -86,6 +123,7 @@ const BillingForm = () => {
           error={errors.streetAddress}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Town/ City"
           name="townCity"
@@ -93,6 +131,7 @@ const BillingForm = () => {
           error={errors.townCity}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Province"
           name="province"
@@ -101,14 +140,15 @@ const BillingForm = () => {
           error={errors.province}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Phone"
           name="phone"
-          type="text"
           register={register}
           error={errors.phone}
         />
         <FormField
+          type="email"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Email address"
           name="email"
@@ -116,6 +156,7 @@ const BillingForm = () => {
           error={errors.email}
         />
         <FormField
+          type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Additional Information"
           name="additionalInfo"
@@ -125,42 +166,7 @@ const BillingForm = () => {
       </div>
 
       <div className="flex w-full flex-col gap-2 sm:w-[608px] sm:px-[2.35rem] sm:py-[87px]">
-        <div className="mb-2 flex justify-between">
-          <span className="font-poppins text-2xl font-medium">Product</span>
-          <span className="font-poppins text-2xl font-medium">Subtotal</span>
-        </div>
-        {cart.map((item) => (
-          <div key={item.id} className="flex justify-between">
-            <div className="flex items-center gap-2">
-              <span className="font-poppins text-base text-color-6">
-                {item.title}
-              </span>
-              <span className="font-poppins text-xs font-medium">X</span>
-              <span className="font-poppins text-xs font-medium">
-                {item.quantity}
-              </span>
-            </div>
-            <div>
-              <span className="font-poppins text-base font-light">
-                {(item.quantity * item.price).toFixed(2)}
-              </span>
-            </div>
-          </div>
-        ))}
-        <div className="mt-1 border-b border-color-6 pb-6">
-          <div className="flex justify-between">
-            <span className="font-poppins text-base font-medium">Subtotal</span>
-            <span className="font-poppins text-base font-medium">
-              {getTotalPrice().toFixed(2)}
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="font-poppins text-base font-medium">Total</span>
-            <span className="font-poppins text-2xl font-bold text-color-4">
-              {getTotalPrice().toFixed(2)}
-            </span>
-          </div>
-        </div>
+        <ProductBill />
 
         <div className="flex flex-col items-center pt-4">
           {paymentMethod === "bankTransfer" && (
@@ -183,19 +189,27 @@ const BillingForm = () => {
           )}
           <div className="js flex w-full flex-col items-start max-sm:items-center">
             <div className="mb-2 mt-4">
-              <Radio
+              <FormField
+                name="paymentMethod"
+                error={errors.paymentMethod}
+                register={register}
                 label="Direct Bank Transfer"
-                value="bankTransfer"
-                checked={paymentMethod === "bankTransfer"}
-                handlePaymentMethod={handlePaymentMethod}
+                value="Direct Bank Transfer"
+                checked={paymentMethod === "Direct Bank Transfer"}
+                onChange={handlePaymentMethod}
+                type="radio"
               />
             </div>
             <div className="mb-8">
-              <Radio
+              <FormField
+                name="paymentMethod"
+                type="radio"
+                register={register}
+                error={errors.paymentMethod}
                 label="Cash On Delivery"
-                value="cashOnDelivery"
-                checked={paymentMethod === "cashOnDelivery"}
-                handlePaymentMethod={handlePaymentMethod}
+                value="Cash On Delivery"
+                checked={paymentMethod === "Cash On Delivery"}
+                onChange={handlePaymentMethod}
               />
             </div>
           </div>
@@ -205,19 +219,18 @@ const BillingForm = () => {
             other purposes described in our{" "}
             <span className="font-semibold">privacy policy.</span>
           </p>
-          {errors.root && (
-            <div className="mb-4 font-poppins font-semibold text-red-800">
-              {errors.root.message}
-            </div>
-          )}
-          {successMessage && (
-            <div className="mb-4 font-poppins font-semibold text-green-800">
-              {successMessage}
-            </div>
-          )}
+        </div>
+
+        {successMessage && (
+          <div className="mb-4 text-center font-poppins font-semibold text-green-800">
+            {successMessage}
+          </div>
+        )}
+
+        <div className="grid justify-center">
           <Button
-            type="submit"
             disabled={isSubmitting}
+            type="submit"
             white
             className="rounded-[15px]text-xl h-[64px] w-[300px] font-medium"
           >

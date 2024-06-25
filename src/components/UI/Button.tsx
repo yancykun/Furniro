@@ -22,7 +22,7 @@ const Button = ({
       white
         ? "bg-color-1 text-color-4 border border-color-4 hover:bg-color-4 hover:text-color-1"
         : "bg-color-4 text-color-1 border border-color-4 hover:bg-color-1 hover:text-color-4"
-    }  `;
+    } ${disabled ? "opacity-50 cursor-not-allowed" : ""}  `;
 
   const spanClass = `relative z-10 text-sm sm:text-base`;
 
