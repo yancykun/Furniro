@@ -1,5 +1,5 @@
 import LoginForm from "../auth/LoginForm";
-import Section from "../components/Layout/Section";
+import Section from "../components/UI/Section";
 
 const LoginPage = () => {
   return (

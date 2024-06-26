@@ -1,10 +1,10 @@
-import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
-import Footer from "../components/Section/Footer/Footer";
-import FeatureShowcase from "../components/Features/Feature/FeaturesShowcase";
+import ExtendedHeader from "../components/Header/ExtendedHeader";
+import Footer from "../components/HomePageSections/Footer";
+import FeatureShowcase from "../components/Features/FeaturesShowcase";
 import { useProducts } from "../hooks/useProducts";
 import Error from "../components/UI/Error";
-import ProductList from "../components/Features/Product/ProductList";
-import ProductSkeletonLoading from "../components/UI/ProductSkeletonLoading";
+import ProductList from "../components/Product/ProductList";
+import ProductSkeletonLoading from "../components/Product/ProductSkeletonLoading";
 
 const ShopPage = () => {
   const { data, error, isLoading } = useProducts();

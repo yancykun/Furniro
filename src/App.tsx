@@ -7,13 +7,13 @@ import ContactPage from "./pages/ContactPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
-import Header from "./components/Section/Header/Header";
-import ScrollToTop from "./components/Features/ScrollToTop/ScrollToTop";
+import Header from "./components/HomePageSections/Header";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
-import SidebarOverlay from "./components/Features/Header/SidebarOverlay";
-import CartSidebarComponent from "./components/Features/Cart/CartSidebarComponent";
-import ProfileSidebarComponent from "./components/Features/Profile/ProfileSidebarComponent";
+import SidebarOverlay from "./components/SidebarOverlay/SidebarOverlay";
+import CartSidebarComponent from "./components/Cart/CartSidebarComponent";
+import ProfileSidebarComponent from "./components/Profile/ProfileSidebarComponent";
 import PageNotFound from "./components/UI/PageNotFound";
 
 const App = () => {

@@ -1,8 +1,8 @@
-import ExtendedHeader from "../components/Features/Header/ExtendedHeader";
-import Cart from "../components/Features/Cart/Cart";
-import FeatureShowcase from "../components/Features/Feature/FeaturesShowcase";
-import Footer from "../components/Section/Footer/Footer";
-import PopularProducts from "../components/Features/Feature/PopularProducts";
+import ExtendedHeader from "../components/Header/ExtendedHeader";
+import Cart from "../components/Cart/Cart";
+import FeatureShowcase from "../components/Features/FeaturesShowcase";
+import Footer from "../components/HomePageSections/Footer";
+import PopularProducts from "../components/PopularProducts/PopularProducts";
 
 const CartPage = () => {
   return (

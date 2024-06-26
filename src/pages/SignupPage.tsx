@@ -1,5 +1,5 @@
 import SignupForm from "../auth/SignupForm";
-import Section from "../components/Layout/Section";
+import Section from "../components/UI/Section";
 
 const SignupPage = () => {
   return (
