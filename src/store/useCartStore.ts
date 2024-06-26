@@ -24,6 +24,10 @@ export const useCartStore = create<CartState>()(
       itemCount: 0,
 
       addToCart: (product: CartItem) => {
+        if (typeof product.price !== "number") {
+          throw new Error("Price must be a number");
+        }
+
         set((state) => {
           const existingProduct = state.cart.find(
             (item) => item.id === product.id,
