@@ -15,7 +15,7 @@ const FormField = <T extends FieldValues>({
 }: FormFieldProps<T>) => {
   return (
     <div
-      className={` ${type === "radio" ? "flex flex-row-reverse gap-2" : "mb-4 flex flex-col"}`}
+      className={`relative ${type === "radio" ? "flex flex-row-reverse gap-2" : "mb-4 flex flex-col"}`}
     >
       {label && (
         <label
@@ -24,6 +24,7 @@ const FormField = <T extends FieldValues>({
           {label}
         </label>
       )}
+
       <input
         type={type}
         placeholder={placeholder}
@@ -33,6 +34,7 @@ const FormField = <T extends FieldValues>({
         onChange={onChange}
         className={`rounded-lg border border-color-6 px-4 font-poppins focus:border-2 focus:border-color-4 focus:outline-none ${className}`}
       />
+
       {error && (
         <span className="mt-2 max-w-[350px] font-poppins font-semibold text-red-800">
           {error.message}

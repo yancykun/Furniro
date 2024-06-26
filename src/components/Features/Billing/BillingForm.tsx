@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import ProductBill from "./ProductBill";
 import { useFormMessageStore } from "../../../store/useFormMessageStore";
+import Alert from "@mui/material/Alert";
 
 type CartType = {
   id: string;
@@ -222,8 +223,10 @@ const BillingForm = () => {
         </div>
 
         {successMessage && (
-          <div className="mb-4 text-center font-poppins font-semibold text-green-800">
-            {successMessage}
+          <div className="mb-4">
+            <Alert variant="filled" severity="success">
+              {successMessage}
+            </Alert>
           </div>
         )}
 

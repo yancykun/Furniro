@@ -4,6 +4,7 @@ import { ContactFormData, ContactSchema } from "../../../types/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useFormMessageStore } from "../../../store/useFormMessageStore";
+import Alert from "@mui/material/Alert";
 
 const ContactForm = () => {
   const { successMessage, setSuccessMessage, clearSuccessMessage } =
@@ -79,8 +80,10 @@ const ContactForm = () => {
       </div>
 
       {successMessage && (
-        <div className="mb-4 font-poppins font-semibold text-green-800">
-          {successMessage}
+        <div className="mb-4">
+          <Alert variant="filled" severity="success">
+            {successMessage}
+          </Alert>
         </div>
       )}
 

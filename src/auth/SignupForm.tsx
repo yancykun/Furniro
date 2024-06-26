@@ -13,6 +13,10 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import Alert from "@mui/material/Alert";
+import { useFormMessageStore } from "../store/useFormMessageStore";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { usePasswordVisibilityStore } from "../store/usePasswordVisibilityStore";
 
 const SignupForm = () => {
   const {
@@ -25,14 +29,31 @@ const SignupForm = () => {
     resolver: zodResolver(AccountSchema),
   });
 
+  const { successMessage, setSuccessMessage, clearSuccessMessage } =
+    useFormMessageStore();
+
   const navigate = useNavigate();
+
+  // State to manage password visibility
+  const { showPassword, togglePasswordVisibility } =
+    usePasswordVisibilityStore();
 
   const handleAccountSubmit = async (data: AccountFormData) => {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.password);
       console.log("Account form success", data);
+
+      // Simulate async operation
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setSuccessMessage("Account created successfully.");
+
+      // Clear success message after 3 sec
+      setTimeout(() => {
+        clearSuccessMessage();
+      }, 3000);
+
+      // Reset form fields after successful submission
       reset();
-      navigate("/");
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An error occurred. Please try again.";
@@ -89,20 +110,38 @@ const SignupForm = () => {
             error={errors.email}
             className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
           />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            register={register}
-            error={errors.password}
-            className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
-          />
+
+          <div className="relative">
+            <FormField
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              register={register}
+              error={errors.password}
+              className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
+            />
+            {showPassword ? (
+              <FaRegEyeSlash
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-[50px] cursor-pointer"
+              />
+            ) : (
+              <FaRegEye
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-[50px] cursor-pointer"
+              />
+            )}
+          </div>
         </div>
-        {errors.root && (
-          <div className="mb-4 font-poppins font-semibold text-red-800">
-            {errors.root.message}
+
+        {successMessage && (
+          <div className="mb-4">
+            <Alert variant="filled" severity="success">
+              {successMessage}
+            </Alert>
           </div>
         )}
+
         <div className="grid justify-center">
           <Button
             disabled={isSubmitting}

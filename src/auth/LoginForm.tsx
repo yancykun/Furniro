@@ -13,6 +13,8 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { usePasswordVisibilityStore } from "../store/usePasswordVisibilityStore";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const LoginForm = () => {
   const {
@@ -20,19 +22,23 @@ const LoginForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-    reset,
   } = useForm<AccountFormData>({
     resolver: zodResolver(AccountSchema),
   });
 
   const navigate = useNavigate();
 
+  const { showPassword, togglePasswordVisibility } =
+    usePasswordVisibilityStore();
+
   const handleAccountSubmit = async (data: AccountFormData) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       console.log("Account form success", data);
-      reset();
-      navigate("/");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An error occurred. Please try again.";
@@ -91,14 +97,28 @@ const LoginForm = () => {
             error={errors.email}
             className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
           />
-          <FormField
-            label="Password"
-            name="password"
-            type="password"
-            register={register}
-            error={errors.password}
-            className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
-          />
+
+          <div className="relative">
+            <FormField
+              label="Password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              register={register}
+              error={errors.password}
+              className="h-[40px] w-full sm:h-[45px] sm:w-[350px]"
+            />
+            {showPassword ? (
+              <FaRegEyeSlash
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-[50px] cursor-pointer"
+              />
+            ) : (
+              <FaRegEye
+                onClick={togglePasswordVisibility}
+                className="absolute right-4 top-[50px] cursor-pointer"
+              />
+            )}
+          </div>
         </div>
         {errors.root && (
           <div className="mb-4 font-poppins font-semibold text-red-800">
