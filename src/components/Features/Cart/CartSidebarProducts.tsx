@@ -9,7 +9,7 @@ const CartSidebarProducts = () => {
     <div className="max-h-[400px] flex-1 overflow-auto px-4">
       {cart.length === 0 ? (
         <p className="px-4 pt-8 text-center font-poppins text-xl font-semibold">
-          Your cart is empty
+          Your cart is empty.
         </p>
       ) : (
         cart.map((item) => (
