@@ -51,10 +51,7 @@ const CartTable = () => {
                     </span>
                   </td>
                   <td className="text-center font-poppins text-sm text-color-6 lg:text-base">
-                    $
-                    {typeof item.price === "number"
-                      ? item.price.toFixed(2)
-                      : "0.00"}
+                    ${item.price.toFixed(2)}
                   </td>
                   <td className="px-4 py-2 text-center">
                     <span className="h-[32px] w-[32px] rounded-[5px] border border-color-6 px-2 py-1 text-center font-poppins text-sm text-color-7 lg:px-3 lg:text-base">
@@ -62,10 +59,7 @@ const CartTable = () => {
                     </span>
                   </td>
                   <td className="px-4 py-2 text-center font-poppins text-sm font-normal text-color-7 lg:text-base">
-                    $
-                    {typeof item.price === "number"
-                      ? (item.price * item.quantity).toFixed(2)
-                      : "0.00"}
+                    ${(item.price * item.quantity).toFixed(2)}
                   </td>
                   <td className="px-4 py-2 text-center">
                     <div className="flex h-full items-center justify-center">
