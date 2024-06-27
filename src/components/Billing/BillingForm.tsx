@@ -1,96 +1,25 @@
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import useBillingForm from "../../hooks/useBillingForm";
 import FormField from "../UI/FormField";
 import Button from "../UI/Button";
-import { useEffect, useState } from "react";
-import { BillingSchema, BillingFormData } from "../../types/types";
-import { useCartStore } from "../../store/useCartStore";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import ProductBill from "./ProductBill";
-import { useFormMessageStore } from "../../store/useFormMessageStore";
+import PaymentMethodField from "../UI/PaymentMethodField";
 import Alert from "@mui/material/Alert";
-import { auth, db } from "../../firebase";
-import { addDoc, collection } from "firebase/firestore";
-import { onAuthStateChanged, User } from "firebase/auth";
-
-type CartType = {
-  id: string;
-  title: string;
-  quantity: number;
-  price: number;
-};
-
-type CombinedFormData = BillingFormData & {
-  cart: CartType[];
-};
 
 const BillingForm = () => {
+  const user = useAuth();
   const [paymentMethod, setPaymentMethod] = useState("Direct Bank Transfer");
-  const [user, setUser] = useState<User | null>(null);
-  const { successMessage, setSuccessMessage, clearSuccessMessage } =
-    useFormMessageStore();
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    errors,
+    isSubmitting,
     setValue,
-    reset,
-  } = useForm<BillingFormData>({
-    resolver: zodResolver(BillingSchema),
-  });
-
-  const cart = useCartStore((state) => state.cart);
-  const clearCart = useCartStore((state) => state.clearCart);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setUser(user);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  const handleBillingSubmit = async (data: BillingFormData) => {
-    if (!user) {
-      alert("You need to be logged in to place an order.");
-      return;
-    }
-
-    const combinedData: CombinedFormData = {
-      ...data,
-      paymentMethod,
-      cart: cart.map((item) => ({
-        id: item.id,
-        title: item.title,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-    };
-
-    try {
-      // Save order data to Firestore under the current user
-      await addDoc(collection(db, "users", user.uid, "orders"), combinedData);
-
-      console.log("Billing Success", combinedData);
-
-      // Simulate async operation
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      setSuccessMessage("Your billing has been successfully sent!");
-
-      // Clear success message after 3 sec
-      setTimeout(() => {
-        clearSuccessMessage();
-      }, 3000);
-
-      // Clear the cart after successful submission
-      clearCart();
-
-      // Reset form fields after successful submission
-      reset();
-    } catch (error) {
-      console.error("Error saving billing data: ", error);
-    }
-  };
+    successMessage,
+    handleBillingSubmit,
+  } = useBillingForm(user, paymentMethod);
 
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPaymentMethod(event.target.value);
@@ -200,49 +129,25 @@ const BillingForm = () => {
 
         <div className="flex flex-col items-center pt-4">
           {paymentMethod === "Direct Bank Transfer" && (
-            <>
-              <p className="max-w-[528px] text-justify font-poppins text-color-6">
-                Make your payment directly into our bank account. Please use
-                your Order ID as the payment reference. Your order will not be
-                shipped until the funds have cleared in our account.
-              </p>
-            </>
+            <p className="max-w-[528px] text-justify font-poppins text-color-6">
+              Make your payment directly into our bank account. Please use your
+              Order ID as the payment reference. Your order will not be shipped
+              until the funds have cleared in our account.
+            </p>
           )}
           {paymentMethod === "Cash On Delivery" && (
-            <>
-              <p className="max-w-[528px] text-justify font-poppins text-color-6">
-                You can choose to pay with cash upon delivery. Please have the
-                exact amount ready as our delivery personnel may not have
-                change. Your order will be processed and shipped immediately.
-              </p>
-            </>
+            <p className="max-w-[528px] text-justify font-poppins text-color-6">
+              You can choose to pay with cash upon delivery. Please have the
+              exact amount ready as our delivery personnel may not have change.
+              Your order will be processed and shipped immediately.
+            </p>
           )}
-          <div className="js flex w-full flex-col items-start max-sm:items-center">
-            <div className="mb-2 mt-4">
-              <FormField
-                name="paymentMethod"
-                error={errors.paymentMethod}
-                register={register}
-                label="Direct Bank Transfer"
-                value="Direct Bank Transfer"
-                checked={paymentMethod === "Direct Bank Transfer"}
-                onChange={handlePaymentMethod}
-                type="radio"
-              />
-            </div>
-            <div className="mb-8">
-              <FormField
-                name="paymentMethod"
-                type="radio"
-                register={register}
-                error={errors.paymentMethod}
-                label="Cash On Delivery"
-                value="Cash On Delivery"
-                checked={paymentMethod === "Cash On Delivery"}
-                onChange={handlePaymentMethod}
-              />
-            </div>
-          </div>
+          <PaymentMethodField
+            paymentMethod={paymentMethod}
+            handlePaymentMethod={handlePaymentMethod}
+            register={register}
+            errors={errors}
+          />
           <p className="mb-6 max-w-[528px] text-justify font-poppins text-base text-color-7 lg:mb-8">
             Your personal data will be used to support your experience
             throughout this website, to manage access to your account, and for
