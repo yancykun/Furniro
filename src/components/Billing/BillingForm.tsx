@@ -19,6 +19,7 @@ const BillingForm = () => {
     setValue,
     successMessage,
     handleBillingSubmit,
+    loginAlertMessage,
   } = useBillingForm(user, paymentMethod);
 
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -160,6 +161,14 @@ const BillingForm = () => {
           <div className="mb-4">
             <Alert variant="filled" severity="success">
               {successMessage}
+            </Alert>
+          </div>
+        )}
+
+        {loginAlertMessage && (
+          <div className="mb-4">
+            <Alert variant="filled" severity="error">
+              {loginAlertMessage}
             </Alert>
           </div>
         )}
