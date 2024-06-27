@@ -1,5 +1,5 @@
-import Button from "../UI/Button";
-import FormField from "../UI/FormField";
+import Button from "../../components/UI/Button";
+import FormField from "../../components/UI/FormField";
 import { ContactFormData, ContactSchema } from "../../types/types";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";

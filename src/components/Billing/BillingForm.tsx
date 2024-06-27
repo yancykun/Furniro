@@ -1,6 +1,6 @@
 import FormField from "../UI/FormField";
 import Button from "../UI/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BillingSchema, BillingFormData } from "../../types/types";
 import { useCartStore } from "../../store/useCartStore";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import ProductBill from "./ProductBill";
 import { useFormMessageStore } from "../../store/useFormMessageStore";
 import Alert from "@mui/material/Alert";
+import { auth, db } from "../../firebase";
+import { addDoc, collection } from "firebase/firestore";
+import { onAuthStateChanged, User } from "firebase/auth";
 
 type CartType = {
   id: string;
@@ -22,6 +25,7 @@ type CombinedFormData = BillingFormData & {
 
 const BillingForm = () => {
   const [paymentMethod, setPaymentMethod] = useState("Direct Bank Transfer");
+  const [user, setUser] = useState<User | null>(null);
   const { successMessage, setSuccessMessage, clearSuccessMessage } =
     useFormMessageStore();
 
@@ -36,8 +40,22 @@ const BillingForm = () => {
   });
 
   const cart = useCartStore((state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleBillingSubmit = async (data: BillingFormData) => {
+    if (!user) {
+      alert("You need to be logged in to place an order.");
+      return;
+    }
+
     const combinedData: CombinedFormData = {
       ...data,
       paymentMethod,
@@ -48,19 +66,30 @@ const BillingForm = () => {
         price: item.price,
       })),
     };
-    console.log("Billing Success", combinedData);
 
-    // Simulate async operation
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    setSuccessMessage("Your billing has been successfully sent!");
+    try {
+      // Save order data to Firestore under the current user
+      await addDoc(collection(db, "users", user.uid, "orders"), combinedData);
 
-    // Clear success message after 3 sec
-    setTimeout(() => {
-      clearSuccessMessage();
-    }, 3000);
+      console.log("Billing Success", combinedData);
 
-    // Reset form fields after successful submission
-    reset();
+      // Simulate async operation
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      setSuccessMessage("Your billing has been successfully sent!");
+
+      // Clear success message after 3 sec
+      setTimeout(() => {
+        clearSuccessMessage();
+      }, 3000);
+
+      // Clear the cart after successful submission
+      clearCart();
+
+      // Reset form fields after successful submission
+      reset();
+    } catch (error) {
+      console.error("Error saving billing data: ", error);
+    }
   };
 
   const handlePaymentMethod = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -135,8 +164,8 @@ const BillingForm = () => {
           type="text"
           className="h-[60px] w-[328px] sm:h-[75px] sm:w-[453px]"
           label="Province"
-          name="province"
           placeholder="North Cotabato"
+          name="province"
           register={register}
           error={errors.province}
         />
@@ -170,7 +199,7 @@ const BillingForm = () => {
         <ProductBill />
 
         <div className="flex flex-col items-center pt-4">
-          {paymentMethod === "bankTransfer" && (
+          {paymentMethod === "Direct Bank Transfer" && (
             <>
               <p className="max-w-[528px] text-justify font-poppins text-color-6">
                 Make your payment directly into our bank account. Please use
@@ -179,7 +208,7 @@ const BillingForm = () => {
               </p>
             </>
           )}
-          {paymentMethod === "cashOnDelivery" && (
+          {paymentMethod === "Cash On Delivery" && (
             <>
               <p className="max-w-[528px] text-justify font-poppins text-color-6">
                 You can choose to pay with cash upon delivery. Please have the

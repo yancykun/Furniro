@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import { useSingleProductStore } from "./useSingleProductStore";
 
 type CartItem = {
   id: string;
@@ -15,6 +16,7 @@ type CartState = {
   removeFromCart: (id: string) => void;
   getTotalPrice: () => number;
   itemCount: number;
+  clearCart: () => void;
 };
 
 export const useCartStore = create<CartState>()(
@@ -52,6 +54,8 @@ export const useCartStore = create<CartState>()(
               product.quantity,
           };
         });
+
+        useSingleProductStore.getState().resetCount();
       },
 
       removeFromCart: (id: string) => {
@@ -73,6 +77,7 @@ export const useCartStore = create<CartState>()(
           0,
         );
       },
+      clearCart: () => set({ cart: [], itemCount: 0 }),
     }),
     {
       name: "cart-storage", // name of the item in the storage (must be unique)
