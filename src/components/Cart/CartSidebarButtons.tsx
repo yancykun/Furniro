@@ -8,7 +8,7 @@ const CartSidebarButtons = () => {
   );
 
   return (
-    <div className="flex gap-4 px-4 py-4">
+    <div className="flex flex-wrap justify-center gap-2 px-2 py-4">
       <Link to="/cart">
         <Button
           onClick={closeCartSidebar}
@@ -26,6 +26,16 @@ const CartSidebarButtons = () => {
           className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-normal capitalize"
         >
           Checkout
+        </Button>
+      </Link>
+
+      <Link to="/order">
+        <Button
+          onClick={closeCartSidebar}
+          white
+          className="h-[30px] w-[120px] rounded-[50px] font-poppins text-xs font-normal capitalize"
+        >
+          Order
         </Button>
       </Link>
     </div>

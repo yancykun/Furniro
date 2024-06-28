@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   const navigate = useNavigate();
 
-  const { showPassword, togglePasswordVisibility } =
+  const { showPassword, togglePasswordVisibility, resetPasswordVisibility } =
     usePasswordVisibilityStore();
 
   const handleAccountSubmit = async (data: AccountFormData) => {
@@ -39,6 +39,9 @@ const LoginForm = () => {
       setTimeout(() => {
         navigate("/");
       }, 1000);
+
+      // Reset password visibility state
+      resetPasswordVisibility();
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An error occurred. Please try again.";

@@ -1,18 +1,16 @@
-import Billing from "../components/Billing/Billing";
-import ExtendedHeader from "../components/Header/ExtendedHeader";
 import FeatureShowcase from "../components/Features/FeaturesShowcase";
 import Footer from "../components/Header/Footer";
+import OrderedProductDetails from "../components/OrderedProducts/OrderedProductDetails";
 import Section from "../components/UI/Section";
 
-const BillingPage = () => {
+const OrderPage = () => {
   return (
     <Section>
-      <ExtendedHeader customTitle="Billing" />
-      <Billing />
+      <OrderedProductDetails />
       <FeatureShowcase />
       <Footer />
     </Section>
   );
 };
 
-export default BillingPage;
+export default OrderPage;

@@ -2,6 +2,7 @@ import { useCartStore } from "../../store/useCartStore";
 
 const ProductBill = () => {
   const { cart, getTotalPrice } = useCartStore();
+
   return (
     <>
       <div className="mb-2 flex justify-between">

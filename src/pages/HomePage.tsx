@@ -2,7 +2,7 @@ import Hero from "../components/HomePageSections/Hero";
 import Categories from "../components/HomePageSections/Categories";
 import Product from "../components/HomePageSections/Product";
 import Inspiration from "../components/HomePageSections/Inspiration";
-import Footer from "../components/HomePageSections/Footer";
+import Footer from "../components/Header/Footer";
 
 const HomePage = () => {
   return (

@@ -38,6 +38,7 @@ const useBillingForm = (user: User | null, paymentMethod: string) => {
         title: item.title,
         quantity: item.quantity,
         price: item.price,
+        imageUrl: item.image,
       })),
     };
 

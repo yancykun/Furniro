@@ -1,7 +1,7 @@
 import ExtendedHeader from "../components/Header/ExtendedHeader";
 import Cart from "../components/Cart/Cart";
 import FeatureShowcase from "../components/Features/FeaturesShowcase";
-import Footer from "../components/HomePageSections/Footer";
+import Footer from "../components/Header/Footer";
 import PopularProducts from "../components/PopularProducts/PopularProducts";
 
 const CartPage = () => {

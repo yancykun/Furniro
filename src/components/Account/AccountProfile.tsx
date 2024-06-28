@@ -1,5 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../../firebase";
 import { useProfileSidebarStore } from "../../store/useProfileSidebarStore";
 import { CgProfile } from "react-icons/cg";
@@ -12,18 +12,14 @@ const AccountProfile = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUserPhoto(user.photoURL || "");
-      } else {
-        setUserPhoto("");
-      }
-      return () => unsubscribe();
+      setUserPhoto(user?.photoURL || "");
     });
+    return unsubscribe;
   }, []);
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     toggleProfileSidebar();
-  }, [toggleProfileSidebar]);
+  };
 
   return (
     <>

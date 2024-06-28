@@ -1,5 +1,5 @@
 import BreadcrumbHeader from "../components/Header/BreadcrumbHeader";
-import Footer from "../components/HomePageSections/Footer";
+import Footer from "../components/Header/Footer";
 import SingleProductCard from "../components/Product/SingleProductCard";
 import PopularProducts from "../components/PopularProducts/PopularProducts";
 

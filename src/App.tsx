@@ -7,7 +7,7 @@ import ContactPage from "./pages/ContactPage";
 import SingleProductPage from "./pages/SingleProductPage";
 import CartPage from "./pages/CartPage";
 import BillingPage from "./pages/BillingPage";
-import Header from "./components/HomePageSections/Header";
+import Header from "./components/Header/Header";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
@@ -15,6 +15,7 @@ import SidebarOverlay from "./components/SidebarOverlay/SidebarOverlay";
 import CartSidebarComponent from "./components/Cart/CartSidebarComponent";
 import ProfileSidebarComponent from "./components/Profile/ProfileSidebarComponent";
 import PageNotFound from "./components/UI/PageNotFound";
+import OrderPage from "./pages/OrderPage";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
         <Route path="/billing" element={<BillingPage />} />
         <Route path="/signin" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/order" element={<OrderPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <CartSidebarComponent />

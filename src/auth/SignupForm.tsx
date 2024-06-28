@@ -35,7 +35,7 @@ const SignupForm = () => {
   const navigate = useNavigate();
 
   // State to manage password visibility
-  const { showPassword, togglePasswordVisibility } =
+  const { showPassword, togglePasswordVisibility, resetPasswordVisibility } =
     usePasswordVisibilityStore();
 
   const handleAccountSubmit = async (data: AccountFormData) => {
@@ -54,6 +54,9 @@ const SignupForm = () => {
 
       // Reset form fields after successful submission
       reset();
+
+      // Reset password visibility state
+      resetPasswordVisibility();
     } catch (error) {
       const authError = error as AuthError;
       let errorMessage = "An error occurred. Please try again.";

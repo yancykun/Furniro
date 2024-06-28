@@ -113,3 +113,16 @@ export const AccountSchema: ZodType<AccountFormData> = z.object({
       "Password must contain at least one special character.",
     ),
 });
+
+export type CartItem = {
+  id: string;
+  title: string;
+  price: number;
+  quantity: number;
+  imageUrl: string;
+};
+
+export type Order = {
+  id: string;
+  cart: CartItem[];
+};

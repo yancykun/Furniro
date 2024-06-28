@@ -1,5 +1,5 @@
 import ExtendedHeader from "../components/Header/ExtendedHeader";
-import Footer from "../components/HomePageSections/Footer";
+import Footer from "../components/Header/Footer";
 import FeatureShowcase from "../components/Features/FeaturesShowcase";
 import { useProducts } from "../hooks/useProducts";
 import Error from "../components/UI/Error";

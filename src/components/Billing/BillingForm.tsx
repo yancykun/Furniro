@@ -8,7 +8,7 @@ import PaymentMethodField from "../UI/PaymentMethodField";
 import Alert from "@mui/material/Alert";
 
 const BillingForm = () => {
-  const user = useAuth();
+  const { data: user } = useAuth();
   const [paymentMethod, setPaymentMethod] = useState("Direct Bank Transfer");
 
   const {
