@@ -57,9 +57,7 @@ const OrderedProducts = () => {
           ))}
         </>
       ) : (
-        <p className="p-2 font-poppins text-2xl font-bold">
-          No orders found!
-        </p>
+        <p className="p-2 font-poppins text-2xl font-bold">No orders found!</p>
       )}
     </div>
   );

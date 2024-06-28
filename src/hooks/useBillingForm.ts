@@ -19,14 +19,20 @@ const useBillingForm = (user: User | null, paymentMethod: string) => {
   const { cart, clearCart } = useCartStore();
   const { successMessage, setSuccessMessage, clearSuccessMessage } =
     useFormMessageStore();
-  const { loginAlertMessage, setShowLoginAlertMessage } =
-    useLoginAlertMessage();
+  const {
+    loginAlertMessage,
+    setShowLoginAlertMessage,
+    clearLoginAlertMessage,
+  } = useLoginAlertMessage();
 
   const handleBillingSubmit = async (data: BillingFormData) => {
     if (!user) {
       setShowLoginAlertMessage(
         "Please log in to complete your order. Logging in ensures a secure and personalized shopping experience.",
       );
+      setTimeout(() => {
+        clearLoginAlertMessage();
+      }, 3000);
       return;
     }
 
